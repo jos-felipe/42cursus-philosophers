@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   newproject.h                                       :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/06/26 11:20:30 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/06/28 14:52:03 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NEWPROJECT_H
-# define NEWPROJECT_H
+#ifndef PHILO_H
+# define PHILO_H
 
-# include "../lib/libft/include/libft.h"
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
 
-void	new_function(char *str);
+# define PHILO_ARGS "\nTry: ./philo number_of_philosophers \
+time_to_die time_to_eat time_to_sleep \
+[number_of_times_each_philosopher_must_eat]\n\n"
+
+void	philo_validate_user_inputs(int argc, char *argv[]);
 
 #endif
