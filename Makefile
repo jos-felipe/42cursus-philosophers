@@ -6,14 +6,14 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/06/28 09:34:58 by josfelip         ###   ########.fr        #
+#    Updated: 2024/06/28 10:45:21 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-PROJECT_NAME = new_project
+PROGRAM_NAME = philo
 
 NAME = ${PROJECT_NAME}
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -g3
 ifdef WITH_DEBUG
