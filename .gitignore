@@ -3,6 +3,7 @@
 !src
 !lib
 !.github
+!qa
 
 !main.c
 !Makefile
