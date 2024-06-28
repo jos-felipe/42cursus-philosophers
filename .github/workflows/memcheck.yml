@@ -1,4 +1,4 @@
-name: CMake
+name: memcheck
 
 on:
   push:
@@ -8,9 +8,9 @@ on:
 
 
 jobs:
-  global_job:
+  memcheck_job:
     runs-on: ubuntu-latest
-    name: cmake
+    name: Memory check
     steps:
     - uses: actions/checkout@v3
-    - run: make && make re && make fclean
+    - run: sudo apt update && sudo apt install valgrind && make valgrind
