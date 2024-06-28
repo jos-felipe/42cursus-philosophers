@@ -6,14 +6,14 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/06/28 09:34:58 by josfelip         ###   ########.fr        #
+#    Updated: 2024/06/28 11:00:21 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-PROJECT_NAME = new_project
+PROGRAM_NAME = philo
 
-NAME = ${PROJECT_NAME}
-CC = gcc
+NAME = ${PROGRAM_NAME}
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -g3
 ifdef WITH_DEBUG
@@ -77,11 +77,11 @@ print:
 	@echo "SRC_PATH: ${SRC_PATH}"
 	@echo "OBJ_PATH: ${OBJ_PATH}"
 
-valgrind: all
+memcheck: all
 	valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind.log ./${NAME}
-	./qa/mem_check.sh
+	sh qa/mem_check.sh
 	
 
-.PHONY: all libft clean fclean re debug print valgrind
+.PHONY: all libft clean fclean re debug print memcheck
 
 
