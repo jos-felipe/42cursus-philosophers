@@ -15,4 +15,4 @@ jobs:
     - name: 42valgrind Leak checker
       uses: solareenlo/42valgrind-action@v1.0.3
       with:
-        flags: 'make memcheck'
+        flags: 'make memcheck -C philo'
