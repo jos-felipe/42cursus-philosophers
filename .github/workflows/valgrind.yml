@@ -1,0 +1,14 @@
+# .github/workflows/valgrind.yml
+name: memcheck-docker
+on: [push, pull_request]
+
+jobs:
+  valgrind:
+    runs-on: ubuntu-latest
+    name: 42valgrind
+    steps:
+    - uses: actions/checkout@v2
+    - name: 42valgrind Leak checker
+      uses: solareenlo/42valgrind-action@v1.0.3
+      with:
+        flags: 'make valgrind'
