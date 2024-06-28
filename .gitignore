@@ -2,6 +2,8 @@
 !include
 !src
 !lib
+!.github
+
 !main.c
 !Makefile
 !.gitignore
