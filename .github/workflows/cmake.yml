@@ -13,4 +13,4 @@ jobs:
     name: cmake
     steps:
     - uses: actions/checkout@v3
-    - run: make re
+    - run: make && make re
