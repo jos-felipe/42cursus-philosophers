@@ -1,9 +1,6 @@
 /*
-!include
-!src
-!lib
+!philo
 !.github
-!qa
 
 !main.c
 !Makefile
