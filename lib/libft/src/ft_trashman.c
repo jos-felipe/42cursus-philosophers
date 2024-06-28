@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:44:33 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/06/26 13:53:25 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/06/28 08:52:26 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_collect_mem(void *content)
 
 void	ft_free_trashman(void)
 {
-	t_list **lst_memory;
+	t_list	**lst_memory;
 	t_list	*next;
 
 	lst_memory = ft_get_mem_address();
