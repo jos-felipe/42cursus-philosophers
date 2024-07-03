@@ -1,43 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   01_args_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/03 14:59:25 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/03 14:47:25 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_init(t_philo *philo)
+int	ft_isdigit(int c)
 {
-	int	i;
-
-	i = -1;
-	while (++i < N_ARGS)
-		philo->args[i] = 0;
+	return (c >= '0' && c <= '9');
 }
 
-void	philo_debug(t_philo	*philo)
-{	
-	int	i;
-
-	i = -1;
-	while (++i < N_ARGS)
-		printf("philo->args[%d] = %u\n", i, philo->args[i]);
-}
-
-int	main(int argc, char *argv[])
+unsigned int	ft_atou(const char *nptr)
 {
-	t_philo	philo;
+	unsigned int	nb;
 
-	philo_init(&philo);
-	philo_debug(&philo);
-	philo_validate_argc(argc);
-	philo_validate_argv(argc, argv, &philo);
-	philo_debug(&philo);
-	return (0);
+	nb = 0;
+	while (*nptr == '\t' || *nptr == '\n' || *nptr == '\v' || \
+			*nptr == '\f' || *nptr == '\r' || *nptr == ' ')
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
+		nptr++;
+	while (ft_isdigit(*nptr))
+	{
+		nb = (*nptr - '0') + (nb * 10);
+		nptr++;
+	}
+	return (nb);
 }
+
