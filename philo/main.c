@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/03 14:59:25 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:03:23 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	philo_init(t_philo *philo)
 }
 
 void	philo_debug(t_philo	*philo)
-{	
+{
 	int	i;
 
 	i = -1;
