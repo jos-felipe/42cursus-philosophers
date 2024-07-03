@@ -6,13 +6,14 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/06/28 11:00:21 by josfelip         ###   ########.fr        #
+#    Updated: 2024/07/03 15:01:51 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PROGRAM_NAME = philo
 
 NAME = ${PROGRAM_NAME}
+ARGS = 4 410 200 200 200
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -g3
@@ -21,11 +22,11 @@ ifdef WITH_DEBUG
   CFLAGS = ${DFLAGS}
 endif
 
-INCLUDE_DIR = ./include
+INCLUDE_DIR = ./
 INCLUDE_PATH = ${wildcard $(INCLUDE_DIR)/*.h}
 INCLUDE = ${notdir $(INCLUDE_PATH)}
 
-SRC_DIR = ./src
+SRC_DIR = ./
 SRC_PATH = ${wildcard $(SRC_DIR)/*.c}
 SRC = ${notdir $(SRC_PATH)}
 
@@ -52,11 +53,8 @@ ${OBJ_DIR}:
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INCLUDE_PATH}
 	${CC} ${CFLAGS} -I${INCLUDE_DIR} -c $< -o $@
 	
-$(OBJ_DIR)/main.o: main.c ${INCLUDE_PATH}
-	${CC} ${CFLAGS} -I${INCLUDE_DIR} -c $< -o $@
-
-${NAME}: ${OBJ_PATH} $(OBJ_DIR)/main.o
-	${CC} ${CFLAGS} -o ${NAME} ${OBJ_PATH} $(OBJ_DIR)/main.o -L $(LIBFT_DIR) -lft
+${NAME}: ${OBJ_PATH}
+	${CC} ${CFLAGS} -o ${NAME} ${OBJ_PATH} -L $(LIBFT_DIR) -lft
 
 clean:
 	${RM} ${OBJ_DIR}
@@ -78,10 +76,12 @@ print:
 	@echo "OBJ_PATH: ${OBJ_PATH}"
 
 memcheck: all
-	valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind.log ./${NAME}
+	valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind.log ./${NAME} ${ARGS}
 	sh qa/mem_check.sh
-	
 
-.PHONY: all libft clean fclean re debug print memcheck
+run: all
+	./${NAME} ${ARGS}
+
+.PHONY: all libft clean fclean re debug print memcheck run
 
 
