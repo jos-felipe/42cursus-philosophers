@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/03 13:48:54 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/03 14:52:50 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,16 @@ void	philo_validate_argc(int argc)
 	}
 }
 
-void	philo_validate_argv(int argc, char *argv[], 
+void	philo_validate_argv(int argc, char *argv[], \
 t_philo *philo)
 {
-	unsigned int	candidate = 0;
+	unsigned int	candidate;
 	int				i;
 
 	i = 1;
 	while (i < argc)
 	{
-		// candidate = ft_atou(argv[i]);
-		printf("name: %s", argv[0]);
+		candidate = ft_atou(argv[i]);
 		if (candidate > 0)
 			philo->args[i - 1] = candidate;
 		else

@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/03 13:49:31 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/03 14:49:40 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char *argv[])
 	philo_init(&philo);
 	philo_debug(&philo);
 	philo_validate_argc(argc);
-	// philo_validate_argv(argc, argv, &philo);
-	printf("name: %s", argv[0]);
+	philo_validate_argv(argc, argv, &philo);
+	philo_debug(&philo);
 	return (0);
 }

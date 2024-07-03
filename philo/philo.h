@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/03 13:49:49 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/03 14:53:10 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ time_to_sleep (in milliseconds) \
 
 # define N_ARGS 5
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	unsigned int	args[N_ARGS];
 
 }				t_philo;
 
-void	philo_validate_argc(int argc);
-void	philo_validate_argv(int argc, char *argv[], 
+void			philo_validate_argc(int argc);
+void			philo_validate_argv(int argc, char *argv[], \
 t_philo *philo);
+unsigned int	ft_atou(const char *nptr);
 
 #endif
