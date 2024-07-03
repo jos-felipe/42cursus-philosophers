@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/03 10:22:37 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/03 11:50:12 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ typedef struct	s_philo
 
 }				t_philo;
 
-void	philo_validate_user_inputs(int argc, char *argv[]);
+void	philo_validate_argc(int argc);
 
 #endif
