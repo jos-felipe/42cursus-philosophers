@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/03 12:21:05 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/03 13:49:31 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,21 @@
 
 void	philo_init(t_philo *philo)
 {
-	philo->number_of_philosophers = 0;
-	philo->time_to_die = 0;
-	philo->time_to_eat = 0;
-	philo->time_to_sleep = 0;
-	philo->number_of_times_each_philosopher_must_eat = 0;
+	int	i;
+	
+	i = -1;
+	while (++i < N_ARGS)
+		philo->args[i] = 0;
 }
 
 void	philo_debug(t_philo	*philo)
 {	
-	printf("philo->number_of_philosophers = %u\n", philo->number_of_philosophers);
-	printf("philo->time_to_die = %u\n", philo->time_to_die);
-	printf("philo->time_to_eat = %u\n", philo->time_to_eat);
-	printf("philo->time_to_sleep = %u\n", philo->time_to_sleep);
-	printf("philo->number_of_times_each_philosopher_must_eat = %u\n", philo->number_of_times_each_philosopher_must_eat);
+	int	i;
+	
+	i = -1;
+	while (++i < N_ARGS)
+		printf("philo->args[%d] = %u\n", i, philo->args[i]);
+	
 }
 
 int	main(int argc, char *argv[])
@@ -37,6 +38,7 @@ int	main(int argc, char *argv[])
 	philo_init(&philo);
 	philo_debug(&philo);
 	philo_validate_argc(argc);
-	philo_validate_argv(argv);
+	// philo_validate_argv(argc, argv, &philo);
+	printf("name: %s", argv[0]);
 	return (0);
 }
