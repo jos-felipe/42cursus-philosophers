@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/03 09:42:46 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:01:10 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	philo_validate_user_inputs(int argc, char *argv[])
 	}
 	else
 	{
-		write(STDERR_FILENO, "\nfatal: invalid argument(s)\n", 21);
+		printf(PHILO_FATAL_ERROR);
 		printf(PHILO_ARGS);
 		exit(EXIT_FAILURE);
 	}
