@@ -6,5 +6,7 @@
 !qa
 
 !main.c
+!01_args.c
+!philo.h
 !Makefile
 !.gitignore
