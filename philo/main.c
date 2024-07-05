@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/05 11:35:04 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/05 12:34:08 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,23 @@ void	*perform_work(void *arguments)
 	return NULL;
 }
 
+void	*perform_task(void *arguments)
+{
+	int	index = *((int *)arguments);
+	int sleep_time = 1 + rand() % NUM_THREADS;
+
+	printf("Philosopher %d: Eaten.\n", index);
+	printf("Philosopher %d: Will be sleeping for %d seconds.\n", index, sleep_time);
+	sleep(sleep_time);
+	printf("Philosopher %d: Died.\n", index);
+	return NULL;
+}
+
 int	main(int argc, char *argv[])
 {
 	t_philo		philo;
 	pthread_t	threads[NUM_THREADS];
+	pthread_t	**_threads;
 	int			thread_args[NUM_THREADS];
 	int			i;
 	int			result_code;
@@ -53,26 +66,36 @@ int	main(int argc, char *argv[])
 	philo_init(&philo);
 	philo_validate_argc(argc);
 	philo_validate_argv(argc, argv, &philo);
+	_threads = (pthread_t **)malloc(philo.args[0] * sizeof(pthread_t *));
 	i = -1;
-	while (++i < NUM_THREADS)
+	while (++i < (int)philo.args[0])
 	{
 		printf("In main: Creating thread %d.\n", i);
 		thread_args[i] = i;
 		result_code = pthread_create(&threads[i], NULL, perform_work, &thread_args[i]);
 		assert(!result_code);
+		_threads[i] = (pthread_t *)malloc(sizeof(pthread_t));
+		printf("In main: Creating philosopher %d.\n", i);
+		result_code = pthread_create(_threads[i], NULL, perform_task, &i);
+		assert(!result_code);
+
 	}
 	printf("In main: All threads are created.\n");
+	printf("In main: All philosophers are created.\n");
 	
 	i = -1;
-	while (++i < NUM_THREADS)
+	while (++i < (int)philo.args[0])
 	{
-		printf("In main: Creating thread %d.\n", i);
-		thread_args[i] = i;
 		result_code = pthread_join(threads[i], NULL);
 		assert(!result_code);
 		printf("In main: Thread %d has ended.\n", i);
+		result_code = pthread_join(*_threads[i], NULL);
+		assert(!result_code);
+		printf("In main: Philosopher %d has died.\n", i);
+		free(_threads[i]);
 	}
 	
 	printf("Main program has ended.\n");
+	free(_threads);
 	return (0);
 }
