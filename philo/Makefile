@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/07/03 15:01:51 by josfelip         ###   ########.fr        #
+#    Updated: 2024/07/05 11:37:14 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ INCLUDE_PATH = ${wildcard $(INCLUDE_DIR)/*.h}
 INCLUDE = ${notdir $(INCLUDE_PATH)}
 
 SRC_DIR = ./
-SRC_PATH = ${wildcard $(SRC_DIR)/*.c}
+SRC_PATH = 01_args_utils.c 01_args.c main.c
 SRC = ${notdir $(SRC_PATH)}
 
 OBJ_DIR = ./obj
@@ -54,7 +54,7 @@ ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INCLUDE_PATH}
 	${CC} ${CFLAGS} -I${INCLUDE_DIR} -c $< -o $@
 	
 ${NAME}: ${OBJ_PATH}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJ_PATH} -L $(LIBFT_DIR) -lft
+	${CC} ${CFLAGS} -o ${NAME} ${OBJ_PATH} -L $(LIBFT_DIR) -lft -pthread
 
 clean:
 	${RM} ${OBJ_DIR}
