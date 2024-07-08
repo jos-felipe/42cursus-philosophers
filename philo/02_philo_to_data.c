@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/08 15:06:00 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:12:33 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	*_perform_task(void *arguments)
 	sleep_time);
 	sleep(sleep_time);
 	printf("_Philosopher %d: Died.\n", index);
+	return (NULL);
 }
 
 void	philo_allocation(t_philo *data, unsigned int *args)
