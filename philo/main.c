@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/05 12:34:08 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:35:06 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,23 @@ void	philo_init(t_philo *philo)
 		philo->args[i] = 0;
 }
 
-void	philo_debug(t_philo	*philo)
+static void	philo_startup(unsigned int *args)
 {
 	int	i;
 
 	i = -1;
 	while (++i < N_ARGS)
-		printf("philo->args[%d] = %u\n", i, philo->args[i]);
+		args[i] = 0;
 }
+
+// static void	philo_debug(t_philo	*philo)
+// {
+// 	int	i;
+
+// 	i = -1;
+// 	while (++i < N_ARGS)
+// 		printf("philo->args[%d] = %u\n", i, philo->args[i]);
+// }
 
 void	*perform_work(void *arguments)
 {
@@ -56,19 +65,22 @@ void	*perform_task(void *arguments)
 
 int	main(int argc, char *argv[])
 {
-	t_philo		philo;
-	pthread_t	threads[NUM_THREADS];
-	pthread_t	**_threads;
-	int			thread_args[NUM_THREADS];
-	int			i;
-	int			result_code;
+	t_philo			philo;
+	unsigned int	args[N_ARGS];
+	pthread_t		threads[NUM_THREADS];
+	pthread_t		**_threads;
+	int				thread_args[NUM_THREADS];
+	int				i;
+	int				result_code;
 
 	philo_init(&philo);
+	philo_startup(args);
 	philo_validate_argc(argc);
 	philo_validate_argv(argc, argv, &philo);
+	philo_validate_argv_(argc, argv);
 	_threads = (pthread_t **)malloc(philo.args[0] * sizeof(pthread_t *));
 	i = -1;
-	while (++i < (int)philo.args[0])
+	while (++i < (int)philo.args[PHILOSOPHERS])
 	{
 		printf("In main: Creating thread %d.\n", i);
 		thread_args[i] = i;
