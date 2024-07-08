@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/08 12:51:46 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:35:19 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			philo_assignment_args(int argc, char *argv[], unsigned *args);
 unsigned int	ft_atou(const char *nptr);
 
 // 02_philo_to_data.c
-void	philo_allocation(t_philo *data, unsigned n);
+void	philo_allocation(t_philo *data, unsigned *args);
 void	philo_dallocation(t_philo *data, unsigned n);
 
 #endif
