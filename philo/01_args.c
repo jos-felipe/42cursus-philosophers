@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/08 11:34:06 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:57:38 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,13 @@ void	philo_validate_argv_(int argc, char *argv[])
 			exit(EXIT_FAILURE);
 		}
 	}
+}
+
+void	philo_assignment_args(int argc, char *argv[], unsigned *args)
+{
+	int	i;
+
+	i = 0;
+	while (++i < argc)
+		args[i - 1] = ft_atou(argv[i]);
 }
