@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_args.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/03 14:52:50 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:07:04 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,27 @@ void	philo_validate_argc(int argc)
 	}
 }
 
-void	philo_validate_argv(int argc, char *argv[], \
-t_philo *philo)
+void	philo_validate_argv(int argc, char *argv[])
 {
-	unsigned int	candidate;
-	int				i;
+	int	i;
 
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (++i < argc)
 	{
-		candidate = ft_atou(argv[i]);
-		if (candidate > 0)
-			philo->args[i - 1] = candidate;
-		else
+		if (ft_atou(argv[i]) <= 0)
 		{
-			printf(OUT_OF_BOUNDS_FATAL);
-			printf(OUT_OF_BOUNDS_INFO);
+			printf(OUT_OF_BOUNDS_FATAL, i);
+			printf(OUT_OF_BOUNDS_INFO, argv[i]);
 			exit(EXIT_FAILURE);
 		}
-		i++;
 	}
+}
+
+void	philo_assignment_args(int argc, char *argv[], unsigned int *args)
+{
+	int	i;
+
+	i = 0;
+	while (++i < argc)
+		args[i - 1] = ft_atou(argv[i]);
 }

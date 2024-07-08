@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/07/03 15:01:51 by josfelip         ###   ########.fr        #
+#    Updated: 2024/07/08 13:05:21 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,11 @@ ifdef WITH_DEBUG
 endif
 
 INCLUDE_DIR = ./
-INCLUDE_PATH = ${wildcard $(INCLUDE_DIR)/*.h}
+INCLUDE_PATH = philo.h
 INCLUDE = ${notdir $(INCLUDE_PATH)}
 
 SRC_DIR = ./
-SRC_PATH = ${wildcard $(SRC_DIR)/*.c}
+SRC_PATH = main.c 01_args_utils.c 01_args.c 02_philo_to_data.c
 SRC = ${notdir $(SRC_PATH)}
 
 OBJ_DIR = ./obj
@@ -36,16 +36,9 @@ ifdef WITH_DEBUG
 endif
 OBJ_PATH = ${addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o)}
 
-LIBFT_DIR = ./lib/libft
-LIBFT = libft.a
-LIBFT_PATH = ${addprefix $(LIBFT_DIR), $(LIBFT)}
-
 RM = rm -rf
 
-all: libft ${OBJ_DIR} ${NAME}
-
-libft:
-	@make -C ${LIBFT_DIR} --no-print-directory
+all: ${OBJ_DIR} ${NAME}
 
 ${OBJ_DIR}:
 	mkdir -p ${OBJ_DIR}
@@ -54,7 +47,7 @@ ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INCLUDE_PATH}
 	${CC} ${CFLAGS} -I${INCLUDE_DIR} -c $< -o $@
 	
 ${NAME}: ${OBJ_PATH}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJ_PATH} -L $(LIBFT_DIR) -lft
+	${CC} ${CFLAGS} -o ${NAME} ${OBJ_PATH} -pthread
 
 clean:
 	${RM} ${OBJ_DIR}
@@ -63,7 +56,6 @@ clean:
 fclean: clean
 	${RM} ${NAME}
 	${RM} ${NAME}_debug
-	@make fclean -C ${LIBFT_DIR} --no-print-directory
 
 re: fclean all
 
@@ -82,6 +74,4 @@ memcheck: all
 run: all
 	./${NAME} ${ARGS}
 
-.PHONY: all libft clean fclean re debug print memcheck run
-
-
+.PHONY: all clean fclean re debug print memcheck run
