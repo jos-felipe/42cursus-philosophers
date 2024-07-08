@@ -3,9 +3,11 @@
 !.github
 !qa
 
+!Makefile
+!.gitignore
+
+!philo.h
 !main.c
 !01_args.c
 !01_args_utils.c
-!philo.h
-!Makefile
-!.gitignore
+!02_philo_to_data.c

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/07/05 11:37:14 by josfelip         ###   ########.fr        #
+#    Updated: 2024/07/08 12:55:16 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,11 @@ ifdef WITH_DEBUG
 endif
 
 INCLUDE_DIR = ./
-INCLUDE_PATH = ${wildcard $(INCLUDE_DIR)/*.h}
+INCLUDE_PATH = philo.h
 INCLUDE = ${notdir $(INCLUDE_PATH)}
 
 SRC_DIR = ./
-SRC_PATH = 01_args_utils.c 01_args.c main.c
+SRC_PATH = main.c 01_args_utils.c 01_args.c 02_philo_to_data.c
 SRC = ${notdir $(SRC_PATH)}
 
 OBJ_DIR = ./obj
