@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/10 14:04:30 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/10 14:06:54 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,6 @@ void	philo_start_feeding(t_host *spaghetti, unsigned int n)
 		assert(!result_code);
 		u++;
 	}
-	free(spaghetti->forks);
+	// free(spaghetti->forks);
 	free(spaghetti->list_of_diners);
 }
