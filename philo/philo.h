@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/10 12:06:17 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:40:06 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ time_to_sleep (in milliseconds) \
 
 # define N_ARGS 5
 # define PHILOSOPHERS 0
-# define TIME_TO_DIE 1
-# define TIME_TO_EAT 2
-# define TIME_TO_SLEEP 3
-# define MEALS 4
+# define TIME_TO_DIE 0
+# define TIME_TO_EAT 1
+# define TIME_TO_SLEEP 2
+# define MEALS 3
 
 # define NUM_THREADS 5
 
@@ -70,5 +70,8 @@ unsigned int	ft_atou(const char *nptr);
 // 02_philo_to_data.c
 void			philo_allocation(t_philo *data, unsigned int *args);
 void			philo_dallocation(t_philo *data, unsigned int n);
+void			philo_fill_the_list_of_diners(t_host *host, unsigned int n);
+void			philo_set_the_table(t_host *host, unsigned int *args);
+
 
 #endif

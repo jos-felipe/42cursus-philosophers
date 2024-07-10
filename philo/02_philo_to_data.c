@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/10 12:06:30 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:43:18 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ static void	*philo_take_a_seat(void *arguments)
 	return (NULL);
 }
 
-static void	*philo_set_diner_diet(t_diner *philo, \
+static void	philo_set_diner_diet(t_diner *philo, \
 unsigned int *args)
 {
 	unsigned int	u;
 
-	u = 2;
+	u = 1;
 	while (u < N_ARGS)
 	{
-		philo->diet[u - 2] = args[u];
+		philo->diet[u - 1] = args[u];
 		u++;
 	}
 }
@@ -115,7 +115,7 @@ void	philo_fill_the_list_of_diners(t_host *host, unsigned int n)
 }
 
 void	philo_set_the_table(t_host *host, \
-unsigned int args)
+unsigned int *args)
 {
 	int				*forks;
 	unsigned int	u;
@@ -128,7 +128,7 @@ unsigned int args)
 	{
 		host->list_of_diners[u].diner_id = u;
 		result_code = pthread_create(host->list_of_diners[u].diner, \
-		NULL, _perform_task, &host->list_of_diners[u]);
+		NULL, philo_take_a_seat, &host->list_of_diners[u]);
 		assert(!result_code);
 		forks[u] = 1;
 		host->list_of_diners[u].forks = forks;
