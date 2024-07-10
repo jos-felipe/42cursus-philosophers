@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/10 12:48:12 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/10 13:50:17 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static void	*philo_take_a_seat(void *arguments)
 	t_diner			*philo;
 
 	philo = (t_diner *)arguments;
-	printf("Hi, I'm Philosopher %u!\n", philo->diner_id);
-	printf("I'll die if I wait more than %u ms to eat.\n", philo->diet[TIME_TO_DIE]);
-	printf("I take %u ms to eat.\n", philo->diet[TIME_TO_EAT]);
-	printf("Then I sleep for %u.\n", philo->diet[TIME_TO_SLEEP]);
-	printf("I'll take only %u meals here.\n", philo->diet[MEALS]);
+	printf("P%u: Hi, I'm Philosopher %u!\n",  philo->diner_id, philo->diner_id);
+	printf("P%u: I'll die if I wait more than %u ms to eat.\n", philo->diner_id, philo->diet[TIME_TO_DIE]);
+	printf("P%u: I take %u ms to eat.\n", philo->diner_id, philo->diet[TIME_TO_EAT]);
+	printf("P%u: Then I sleep for %u ms.\n", philo->diner_id, philo->diet[TIME_TO_SLEEP]);
+	printf("P%u: I'll take %u meals before I leave the table.\n", philo->diner_id, philo->diet[MEALS]);
 	return (NULL);
 }
 
@@ -117,23 +117,38 @@ void	philo_fill_the_list_of_diners(t_host *host, unsigned int n)
 void	philo_set_the_table(t_host *host, \
 unsigned int *args)
 {
-	int				*forks;
 	unsigned int	u;
 	int				result_code;
 
-	forks = (int *)malloc(host->seats * sizeof(int));
-	philo_memcheck(forks);
+	host->forks = (int *)malloc(host->seats * sizeof(int));
+	philo_memcheck(host->forks);
 	u = 0;
 	while (u < host->seats)
 	{
 		host->list_of_diners[u].diner_id = u;
-		result_code = pthread_create(host->list_of_diners[u].diner, \
+		result_code = pthread_create(&host->list_of_diners[u].diner, \
 		NULL, philo_take_a_seat, &host->list_of_diners[u]);
 		assert(!result_code);
-		forks[u] = 1;
-		host->list_of_diners[u].forks = forks;
+		host->forks[u] = 1;
+		host->list_of_diners[u].forks = host->forks;
 		philo_set_diner_diet(&host->list_of_diners[u], \
 		args);
 		u++;
 	}
+}
+
+void	philo_start_feeding(t_host *spaghetti, unsigned int n)
+{
+	unsigned int	u;
+	int				result_code;
+
+	u = 0;
+	while (u < n)
+	{
+		result_code = pthread_join(spaghetti->list_of_diners[u].diner, NULL);
+		assert(!result_code);
+		u++;
+	}
+	free(spaghetti->forks);
+	free(spaghetti->list_of_diners);
 }

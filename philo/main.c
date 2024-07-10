@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/10 12:33:27 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/10 13:46:55 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int argc, char *argv[])
 	// printf("Main program has ended.\n");
 	philo_fill_the_list_of_diners(&spaghetti, args[PHILOSOPHERS]);
 	philo_set_the_table(&spaghetti, args);
+	philo_start_feeding(&spaghetti, args[PHILOSOPHERS]);
 
 	return (0);
 }

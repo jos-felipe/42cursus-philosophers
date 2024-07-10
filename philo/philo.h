@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/10 12:40:06 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/10 13:46:24 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,14 @@ typedef struct s_diner
 {
 	unsigned int	diner_id;
 	unsigned int	diet[N_ARGS - 1];
-	pthread_t		*diner;
 	int				*forks;
+	pthread_t		diner;
 }				t_diner;
 
 typedef struct s_host
 {
 	unsigned int	seats;
+	int				*forks;
 	t_diner			*list_of_diners;
 }				t_host;
 // 01_args.c
@@ -72,6 +73,8 @@ void			philo_allocation(t_philo *data, unsigned int *args);
 void			philo_dallocation(t_philo *data, unsigned int n);
 void			philo_fill_the_list_of_diners(t_host *host, unsigned int n);
 void			philo_set_the_table(t_host *host, unsigned int *args);
+void			philo_start_feeding(t_host *spaghetti, unsigned int n);
+
 
 
 #endif
