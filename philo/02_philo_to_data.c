@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/10 12:43:18 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:48:12 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	philo_allocation(t_philo *data, unsigned int *args)
 		assert(!result_code);
 		u++;
 	}
-	pthread_self();
+	// pthread_self();
 }
 
 void	philo_dallocation(t_philo *data, unsigned int n)
