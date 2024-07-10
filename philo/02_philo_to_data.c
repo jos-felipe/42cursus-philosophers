@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/10 11:38:07 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:06:30 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,28 @@ static void	*_perform_task(void *arguments)
 
 static void	*philo_take_a_seat(void *arguments)
 {
-	int				index;
-	int				sleep_time;
-	unsigned int	*args;
 	t_diner			*philo;
 
 	philo = (t_diner *)arguments;
-	index = 1 + rand() % args[PHILOSOPHERS];
-	sleep_time = 1 + rand() % args[PHILOSOPHERS];
-	printf("Philosopher %d: Eaten.\n", index);
-	printf("_Philosopher %d: Will be sleeping for %d seconds.\n", index, \
-	sleep_time);
-	sleep(sleep_time);
-	printf("_Philosopher %d: Died.\n", index);
+	printf("Hi, I'm Philosopher %u!\n", philo->diner_id);
+	printf("I'll die if I wait more than %u ms to eat.\n", philo->diet[TIME_TO_DIE]);
+	printf("I take %u ms to eat.\n", philo->diet[TIME_TO_EAT]);
+	printf("Then I sleep for %u.\n", philo->diet[TIME_TO_SLEEP]);
+	printf("I'll take only %u meals here.\n", philo->diet[MEALS]);
 	return (NULL);
+}
+
+static void	*philo_set_diner_diet(t_diner *philo, \
+unsigned int *args)
+{
+	unsigned int	u;
+
+	u = 2;
+	while (u < N_ARGS)
+	{
+		philo->diet[u - 2] = args[u];
+		u++;
+	}
 }
 
 void	philo_allocation(t_philo *data, unsigned int *args)
@@ -106,7 +114,8 @@ void	philo_fill_the_list_of_diners(t_host *host, unsigned int n)
 	philo_memcheck(host->list_of_diners);
 }
 
-void	philo_set_the_table(t_host *host)
+void	philo_set_the_table(t_host *host, \
+unsigned int args)
 {
 	int				*forks;
 	unsigned int	u;
@@ -123,6 +132,8 @@ void	philo_set_the_table(t_host *host)
 		assert(!result_code);
 		forks[u] = 1;
 		host->list_of_diners[u].forks = forks;
+		philo_set_diner_diet(&host->list_of_diners[u], \
+		args);
 		u++;
 	}
 }
