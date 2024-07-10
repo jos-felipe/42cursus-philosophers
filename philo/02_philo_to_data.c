@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/10 13:50:17 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/10 14:04:30 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,12 @@ unsigned int *args)
 	while (u < host->seats)
 	{
 		host->list_of_diners[u].diner_id = u;
+		philo_set_diner_diet(&host->list_of_diners[u], args);
+		host->forks[u] = 1;
+		host->list_of_diners[u].forks = host->forks;
 		result_code = pthread_create(&host->list_of_diners[u].diner, \
 		NULL, philo_take_a_seat, &host->list_of_diners[u]);
 		assert(!result_code);
-		host->forks[u] = 1;
-		host->list_of_diners[u].forks = host->forks;
-		philo_set_diner_diet(&host->list_of_diners[u], \
-		args);
 		u++;
 	}
 }
