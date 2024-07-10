@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/08 15:12:33 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/10 11:38:07 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,24 @@ static void	*_perform_task(void *arguments)
 	return (NULL);
 }
 
+static void	*philo_take_a_seat(void *arguments)
+{
+	int				index;
+	int				sleep_time;
+	unsigned int	*args;
+	t_diner			*philo;
+
+	philo = (t_diner *)arguments;
+	index = 1 + rand() % args[PHILOSOPHERS];
+	sleep_time = 1 + rand() % args[PHILOSOPHERS];
+	printf("Philosopher %d: Eaten.\n", index);
+	printf("_Philosopher %d: Will be sleeping for %d seconds.\n", index, \
+	sleep_time);
+	sleep(sleep_time);
+	printf("_Philosopher %d: Died.\n", index);
+	return (NULL);
+}
+
 void	philo_allocation(t_philo *data, unsigned int *args)
 {
 	unsigned int	u;
@@ -56,6 +74,7 @@ void	philo_allocation(t_philo *data, unsigned int *args)
 		assert(!result_code);
 		u++;
 	}
+	pthread_self();
 }
 
 void	philo_dallocation(t_philo *data, unsigned int n)
@@ -73,4 +92,37 @@ void	philo_dallocation(t_philo *data, unsigned int n)
 		u++;
 	}
 	free(data->threads);
+}
+
+void	philo_fill_the_list_of_diners(t_host *host, unsigned int n)
+{
+	if (n < 2)
+	{
+		printf("fatal: number of philosophers must be greater than one");
+		exit(EXIT_FAILURE);
+	}
+	host->seats = n;
+	host->list_of_diners = (t_diner *)malloc(n * sizeof(t_diner));
+	philo_memcheck(host->list_of_diners);
+}
+
+void	philo_set_the_table(t_host *host)
+{
+	int				*forks;
+	unsigned int	u;
+	int				result_code;
+
+	forks = (int *)malloc(host->seats * sizeof(int));
+	philo_memcheck(forks);
+	u = 0;
+	while (u < host->seats)
+	{
+		host->list_of_diners[u].diner_id = u;
+		result_code = pthread_create(host->list_of_diners[u].diner, \
+		NULL, _perform_task, &host->list_of_diners[u]);
+		assert(!result_code);
+		forks[u] = 1;
+		host->list_of_diners[u].forks = forks;
+		u++;
+	}
 }

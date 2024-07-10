@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/08 15:02:08 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/10 11:35:43 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,23 @@ typedef struct s_philo
 	pthread_t	**threads;
 }				t_philo;
 
+
+typedef struct s_diner
+{
+	unsigned int	diner_id;
+	unsigned int	time_to_die;
+	unsigned int	time_to_eat;
+	unsigned int	time_to_sleep;
+	unsigned int	number_of_times_each_philosopher_must_eat;
+	pthread_t		*diner;
+	int				*forks;
+}				t_diner;
+
+typedef struct s_host
+{
+	unsigned int	seats;
+	t_diner			*list_of_diners;
+}				t_host;
 // 01_args.c
 void			philo_validate_argc(int argc);
 void			philo_validate_argv(int argc, char *argv[]);
