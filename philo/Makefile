@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/07/10 13:59:18 by josfelip         ###   ########.fr        #
+#    Updated: 2024/07/10 14:25:17 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,9 +68,13 @@ print:
 	@echo "OBJ_PATH: ${OBJ_PATH}"
 
 memcheck: all
-	valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME} ${ARGS}
+	valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind.log ./${NAME} ${ARGS}
+	sh qa/mem_check.sh
 
+faultcheck: all
+	valgrind -s --track-origins=yes ./${NAME} ${ARGS}
+	
 run: all
 	./${NAME} ${ARGS}
 
-.PHONY: all clean fclean re debug print memcheck run
+.PHONY: all clean fclean re debug print memcheck faultcheck run 
