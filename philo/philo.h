@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/11 13:45:39 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:55:14 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ typedef struct s_diner
 	pthread_t		diner;
 }				t_diner;
 
-typedef struct s_host
+typedef struct s_buffet
 {
 	unsigned int	seats;
 	int				*forks;
 	t_diner			*list_of_diners;
-}				t_host;
+}				t_buffet;
 // 01_args.c
 void			philo_validate_argc(int argc);
 void			philo_validate_argv(int argc, char *argv[]);
@@ -70,9 +70,9 @@ unsigned int	ft_atou(const char *nptr);
 // 02_philo_to_data.c
 void			philo_allocation(t_philo *data, unsigned int *args);
 void			philo_dallocation(t_philo *data, unsigned int n);
-void			philo_fill_the_list_of_diners(t_host *host, unsigned int n);
-void			philo_set_the_table(t_host *host, unsigned int *args);
-void			philo_start_feeding(t_host *spaghetti, unsigned int n);
+void			philo_fill_the_list_of_diners(t_buffet *host, unsigned int n);
+void			philo_set_the_table(t_buffet *host, unsigned int *args);
+void			philo_start_feeding(t_buffet *spaghetti, unsigned int n);
 
 // 02_buffet_utils.c
 void			philo_memcheck(void *ptr);

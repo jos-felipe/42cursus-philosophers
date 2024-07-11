@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/11 13:44:53 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:55:08 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ unsigned int *args)
 	}
 }
 
-void	philo_fill_the_list_of_diners(t_host *host, unsigned int n)
+void	philo_fill_the_list_of_diners(t_buffet *host, unsigned int n)
 {
 	if (n < 2)
 	{
@@ -54,7 +54,7 @@ void	philo_fill_the_list_of_diners(t_host *host, unsigned int n)
 	philo_memcheck(host->list_of_diners);
 }
 
-void	philo_set_the_table(t_host *host, \
+void	philo_set_the_table(t_buffet *host, \
 unsigned int *args)
 {
 	unsigned int	u;
@@ -76,7 +76,7 @@ unsigned int *args)
 	}
 }
 
-void	philo_start_feeding(t_host *spaghetti, unsigned int n)
+void	philo_start_feeding(t_buffet *spaghetti, unsigned int n)
 {
 	unsigned int	u;
 	int				result_code;
