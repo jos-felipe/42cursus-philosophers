@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/10 13:46:24 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:45:39 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_philo
 	pthread_t	**threads;
 }				t_philo;
 
-
 typedef struct s_diner
 {
 	unsigned int	diner_id;
@@ -75,6 +74,7 @@ void			philo_fill_the_list_of_diners(t_host *host, unsigned int n);
 void			philo_set_the_table(t_host *host, unsigned int *args);
 void			philo_start_feeding(t_host *spaghetti, unsigned int n);
 
-
+// 02_buffet_utils.c
+void			philo_memcheck(void *ptr);
 
 #endif

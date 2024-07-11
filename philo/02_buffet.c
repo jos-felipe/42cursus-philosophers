@@ -1,53 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_philo_to_data.c                                 :+:      :+:    :+:   */
+/*   02_buffet.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/10 14:29:24 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:44:53 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static void	philo_memcheck(void *ptr)
-{
-	if (!ptr)
-	{
-		printf("fatal: unable to allocate memory");
-		exit(EXIT_FAILURE);
-	}
-}
-
-static void	*_perform_task(void *arguments)
-{
-	int				index;
-	int				sleep_time;
-	unsigned int	*args;
-
-	args = (unsigned *)arguments;
-	index = 1 + rand() % args[PHILOSOPHERS];
-	sleep_time = 1 + rand() % args[PHILOSOPHERS];
-	printf("_Philosopher %d: Eaten.\n", index);
-	printf("_Philosopher %d: Will be sleeping for %d seconds.\n", index, \
-	sleep_time);
-	sleep(sleep_time);
-	printf("_Philosopher %d: Died.\n", index);
-	return (NULL);
-}
 
 static void	*philo_take_a_seat(void *arguments)
 {
 	t_diner			*philo;
 
 	philo = (t_diner *)arguments;
-	printf("P%u: Hi, I'm Philosopher %u!\n",  philo->diner_id, philo->diner_id);
-	printf("P%u: I'll die if I wait more than %u ms to eat.\n", philo->diner_id, philo->diet[TIME_TO_DIE]);
-	printf("P%u: I take %u ms to eat.\n", philo->diner_id, philo->diet[TIME_TO_EAT]);
-	printf("P%u: Then I sleep for %u ms.\n", philo->diner_id, philo->diet[TIME_TO_SLEEP]);
-	printf("P%u: I'll take %u meals before I leave the table.\n", philo->diner_id, philo->diet[MEALS]);
+	printf("P%u: Hi, I'm Philosopher %u!\n", philo->diner_id, philo->diner_id);
+	printf("P%u: I'll die if I wait more than %u ms to eat.\n", \
+	philo->diner_id, philo->diet[TIME_TO_DIE]);
+	printf("P%u: I take %u ms to eat.\n", philo->diner_id, \
+	philo->diet[TIME_TO_EAT]);
+	printf("P%u: Then I sleep for %u ms.\n", philo->diner_id, \
+	philo->diet[TIME_TO_SLEEP]);
+	printf("P%u: I'll take %u meals before I leave the table.\n", \
+	philo->diner_id, philo->diet[MEALS]);
 	return (NULL);
 }
 
@@ -62,44 +40,6 @@ unsigned int *args)
 		philo->diet[u - 1] = args[u];
 		u++;
 	}
-}
-
-void	philo_allocation(t_philo *data, unsigned int *args)
-{
-	unsigned int	u;
-	int				result_code;
-
-	data->threads = (pthread_t **)malloc(args[PHILOSOPHERS] * \
-	sizeof(pthread_t *));
-	philo_memcheck(data->threads);
-	u = 0;
-	while (u < args[PHILOSOPHERS])
-	{
-		data->threads[u] = (pthread_t *)malloc(sizeof(pthread_t));
-		printf("In main: Creating philosopher %u.\n", u);
-		result_code = pthread_create(data->threads[u], NULL, \
-		_perform_task, args);
-		assert(!result_code);
-		u++;
-	}
-	// pthread_self();
-}
-
-void	philo_dallocation(t_philo *data, unsigned int n)
-{
-	unsigned int	u;
-	int				result_code;
-
-	u = 0;
-	while (u < n)
-	{
-		result_code = pthread_join(*data->threads[u], NULL);
-		assert(!result_code);
-		printf("In main: Philosopher %u has died.\n", u);
-		free(data->threads[u]);
-		u++;
-	}
-	free(data->threads);
 }
 
 void	philo_fill_the_list_of_diners(t_host *host, unsigned int n)
