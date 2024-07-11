@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/08 15:02:08 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:55:14 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ time_to_sleep (in milliseconds) \
 
 # define N_ARGS 5
 # define PHILOSOPHERS 0
+# define TIME_TO_DIE 0
+# define TIME_TO_EAT 1
+# define TIME_TO_SLEEP 2
+# define MEALS 3
+
 # define NUM_THREADS 5
 
 typedef struct s_philo
@@ -39,6 +44,20 @@ typedef struct s_philo
 	pthread_t	**threads;
 }				t_philo;
 
+typedef struct s_diner
+{
+	unsigned int	diner_id;
+	unsigned int	diet[N_ARGS - 1];
+	int				*forks;
+	pthread_t		diner;
+}				t_diner;
+
+typedef struct s_buffet
+{
+	unsigned int	seats;
+	int				*forks;
+	t_diner			*list_of_diners;
+}				t_buffet;
 // 01_args.c
 void			philo_validate_argc(int argc);
 void			philo_validate_argv(int argc, char *argv[]);
@@ -51,5 +70,11 @@ unsigned int	ft_atou(const char *nptr);
 // 02_philo_to_data.c
 void			philo_allocation(t_philo *data, unsigned int *args);
 void			philo_dallocation(t_philo *data, unsigned int n);
+void			philo_fill_the_list_of_diners(t_buffet *host, unsigned int n);
+void			philo_set_the_table(t_buffet *host, unsigned int *args);
+void			philo_start_feeding(t_buffet *spaghetti, unsigned int n);
+
+// 02_buffet_utils.c
+void			philo_memcheck(void *ptr);
 
 #endif

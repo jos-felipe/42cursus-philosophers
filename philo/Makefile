@@ -6,14 +6,14 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/07/08 13:05:21 by josfelip         ###   ########.fr        #
+#    Updated: 2024/07/11 13:48:00 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PROGRAM_NAME = philo
 
 NAME = ${PROGRAM_NAME}
-ARGS = 4 410 200 200 200
+ARGS = 4 410 200 201 202
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -g3
@@ -27,7 +27,7 @@ INCLUDE_PATH = philo.h
 INCLUDE = ${notdir $(INCLUDE_PATH)}
 
 SRC_DIR = ./
-SRC_PATH = main.c 01_args_utils.c 01_args.c 02_philo_to_data.c
+SRC_PATH = main.c 01_args_utils.c 01_args.c 02_buffet_utils.c 02_buffet.c
 SRC = ${notdir $(SRC_PATH)}
 
 OBJ_DIR = ./obj
@@ -71,7 +71,10 @@ memcheck: all
 	valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind.log ./${NAME} ${ARGS}
 	sh qa/mem_check.sh
 
+faultcheck: all
+	valgrind -s --track-origins=yes ./${NAME} ${ARGS}
+	
 run: all
 	./${NAME} ${ARGS}
 
-.PHONY: all clean fclean re debug print memcheck run
+.PHONY: all clean fclean re debug print memcheck faultcheck run 
