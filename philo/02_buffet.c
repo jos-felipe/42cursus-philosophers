@@ -6,38 +6,21 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/11 13:55:08 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/15 11:02:52 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static void	*philo_take_a_seat(void *arguments)
-{
-	t_diner			*philo;
-
-	philo = (t_diner *)arguments;
-	printf("P%u: Hi, I'm Philosopher %u!\n", philo->diner_id, philo->diner_id);
-	printf("P%u: I'll die if I wait more than %u ms to eat.\n", \
-	philo->diner_id, philo->diet[TIME_TO_DIE]);
-	printf("P%u: I take %u ms to eat.\n", philo->diner_id, \
-	philo->diet[TIME_TO_EAT]);
-	printf("P%u: Then I sleep for %u ms.\n", philo->diner_id, \
-	philo->diet[TIME_TO_SLEEP]);
-	printf("P%u: I'll take %u meals before I leave the table.\n", \
-	philo->diner_id, philo->diet[MEALS]);
-	return (NULL);
-}
 
 static void	philo_set_diner_diet(t_diner *philo, \
 unsigned int *args)
 {
 	unsigned int	u;
 
-	u = 1;
+	u = 0;
 	while (u < N_ARGS)
 	{
-		philo->diet[u - 1] = args[u];
+		philo->diet[u] = args[u];
 		u++;
 	}
 }
@@ -59,10 +42,14 @@ unsigned int *args)
 {
 	unsigned int	u;
 	int				result_code;
+	void			*start_routine;
 
 	host->forks = (int *)malloc(host->seats * sizeof(int));
 	philo_memcheck(host->forks);
 	u = 0;
+	start_routine = philo_all_you_can_eat;
+	if (args[MEALS])
+		start_routine = philo_a_la_carte;
 	while (u < host->seats)
 	{
 		host->list_of_diners[u].diner_id = u;
@@ -70,7 +57,7 @@ unsigned int *args)
 		host->forks[u] = 1;
 		host->list_of_diners[u].forks = host->forks;
 		result_code = pthread_create(&host->list_of_diners[u].diner, \
-		NULL, philo_take_a_seat, &host->list_of_diners[u]);
+		NULL, start_routine, &host->list_of_diners[u]);
 		assert(!result_code);
 		u++;
 	}

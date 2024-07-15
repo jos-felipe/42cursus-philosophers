@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/11 13:55:14 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/15 11:03:40 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,10 @@ time_to_sleep (in milliseconds) \
 
 # define N_ARGS 5
 # define PHILOSOPHERS 0
-# define TIME_TO_DIE 0
-# define TIME_TO_EAT 1
-# define TIME_TO_SLEEP 2
-# define MEALS 3
-
-# define NUM_THREADS 5
+# define TIME_TO_DIE 1
+# define TIME_TO_EAT 2
+# define TIME_TO_SLEEP 3
+# define MEALS 4
 
 typedef struct s_philo
 {
@@ -47,7 +45,7 @@ typedef struct s_philo
 typedef struct s_diner
 {
 	unsigned int	diner_id;
-	unsigned int	diet[N_ARGS - 1];
+	unsigned int	diet[N_ARGS];
 	int				*forks;
 	pthread_t		diner;
 }				t_diner;
@@ -76,5 +74,9 @@ void			philo_start_feeding(t_buffet *spaghetti, unsigned int n);
 
 // 02_buffet_utils.c
 void			philo_memcheck(void *ptr);
+
+// 03_start_the_meal.c
+void			*philo_all_you_can_eat(void *arguments);
+void			*philo_a_la_carte(void *arguments);
 
 #endif
