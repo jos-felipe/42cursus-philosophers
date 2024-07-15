@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/15 10:49:08 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/15 11:03:13 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	*philo_all_you_can_eat(void *arguments)
 	philo = (t_diner *)arguments;
 	u = philo->diner_id + 1;
 	next = u % philo->diet[PHILOSOPHERS] + 1;
-	
 	while (philo->forks[u - 1] && philo->forks[next - 1])
 	{
 		philo->forks[u - 1] = 0;
@@ -45,7 +44,6 @@ void	*philo_a_la_carte(void *arguments)
 	philo = (t_diner *)arguments;
 	u = philo->diner_id + 1;
 	next = u % philo->diet[PHILOSOPHERS] + 1;
-	
 	while (philo->forks[u - 1] && philo->forks[next - 1] && \
 	philo->diet[MEALS])
 	{
