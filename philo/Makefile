@@ -6,14 +6,14 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/07/11 14:28:25 by josfelip         ###   ########.fr        #
+#    Updated: 2024/07/15 11:00:47 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PROGRAM_NAME = philo
 
 NAME = ${PROGRAM_NAME}
-ARGS = 4 410 200 201 202
+ARGS = 4 410 200 201 3
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -g3

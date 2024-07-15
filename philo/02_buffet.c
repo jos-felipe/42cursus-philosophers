@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/11 14:29:20 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/15 10:53:50 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,14 @@ unsigned int *args)
 {
 	unsigned int	u;
 	int				result_code;
+	void			*start_routine;
 
 	host->forks = (int *)malloc(host->seats * sizeof(int));
 	philo_memcheck(host->forks);
 	u = 0;
+	start_routine = philo_all_you_can_eat;
+	if (args[MEALS])
+		start_routine = philo_a_la_carte;
 	while (u < host->seats)
 	{
 		host->list_of_diners[u].diner_id = u;
@@ -70,7 +74,7 @@ unsigned int *args)
 		host->forks[u] = 1;
 		host->list_of_diners[u].forks = host->forks;
 		result_code = pthread_create(&host->list_of_diners[u].diner, \
-		NULL, philo_manage_the_forks, &host->list_of_diners[u]);
+		NULL, start_routine, &host->list_of_diners[u]);
 		assert(!result_code);
 		u++;
 	}
