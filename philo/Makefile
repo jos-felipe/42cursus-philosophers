@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/07/16 15:17:27 by josfelip         ###   ########.fr        #
+#    Updated: 2024/07/29 17:11:21 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ INCLUDE_PATH = philo.h
 INCLUDE = ${notdir $(INCLUDE_PATH)}
 
 SRC_DIR = ./
-SRC_PATH = main.c 01_args_utils.c 01_args.c 02_buffet_utils.c 02_buffet.c 03_start_the_meal.c
+SRC_PATH = main.c 01_args_utils.c 01_args.c 02_buffet_utils.c 02_buffet.c 03_start_the_meal.c 04_timestamp.c
 SRC = ${notdir $(SRC_PATH)}
 
 OBJ_DIR = ./obj

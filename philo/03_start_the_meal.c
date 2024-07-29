@@ -6,13 +6,13 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/16 15:15:43 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:20:54 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	philo_eat_sleep_think(t_diner *philo, unsigned int u, \
+/* static void	philo_eat_sleep_think(t_diner *philo, unsigned int u, \
 unsigned int next)
 {
 	philo->forks[u - 1] = 0;
@@ -27,7 +27,7 @@ unsigned int next)
 	printf("%u is sleeping\n", u);
 	usleep(philo->diet[TIME_TO_SLEEP] * 1000);
 	printf("%u is thinking\n", u);
-}
+} */
 
 void	*philo_all_you_can_eat(void *arguments)
 {
@@ -44,7 +44,7 @@ void	*philo_all_you_can_eat(void *arguments)
 	while (42)
 	{
 		if (philo->forks[u - 1] && philo->forks[next - 1])
-			philo_eat_sleep_think(philo, u, next);
+			philo_timestamp_eat_sleep_think(philo, u, next, 0);
 	}
 	return (NULL);
 }
@@ -64,7 +64,7 @@ void	*philo_a_la_carte(void *arguments)
 	while (philo->diet[MEALS])
 	{
 		if (philo->forks[u - 1] && philo->forks[next - 1])
-			philo_eat_sleep_think(philo, u, next);
+			philo_timestamp_eat_sleep_think(philo, u, next, 0);
 	}
 	return (NULL);
 }
