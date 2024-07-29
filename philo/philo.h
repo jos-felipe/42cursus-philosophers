@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/15 11:03:40 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:14:48 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <assert.h>
+# include <sys/time.h>
 
 # define PHILO_FATAL_ERROR "fatal: invalid number of arguments\n"
 # define PHILO_ARGS "info: ./philo \
