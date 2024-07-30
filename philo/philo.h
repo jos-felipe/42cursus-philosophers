@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/29 17:10:14 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:04:09 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_diner
 	unsigned int	diet[N_ARGS];
 	int				*forks;
 	pthread_t		diner;
+	struct timeval	meal_start;
 }				t_diner;
 
 typedef struct s_buffet
@@ -56,6 +57,7 @@ typedef struct s_buffet
 	unsigned int	seats;
 	int				*forks;
 	t_diner			*list_of_diners;
+	struct timeval	meal_start;
 }				t_buffet;
 // 01_args.c
 void			philo_validate_argc(int argc);
@@ -82,7 +84,7 @@ void			*philo_a_la_carte(void *arguments);
 
 // 04_timestamp.c
 void			philo_timestamp_eat_sleep_think(t_diner *philo, \
-unsigned int u, unsigned int next, long int meal_start);
+unsigned int u, unsigned int next);
 
 
 #endif
