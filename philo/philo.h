@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/30 16:04:09 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/31 15:45:14 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,6 @@ void			*philo_a_la_carte(void *arguments);
 // 04_timestamp.c
 void			philo_timestamp_eat_sleep_think(t_diner *philo, \
 unsigned int u, unsigned int next);
-
+double			philo_timestamp_ms(struct timeval meal_start);
 
 #endif

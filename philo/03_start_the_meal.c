@@ -6,12 +6,11 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/30 15:57:39 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/31 15:42:57 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 void	*philo_all_you_can_eat(void *arguments)
 {
@@ -22,7 +21,7 @@ void	*philo_all_you_can_eat(void *arguments)
 	philo = (t_diner *)arguments;
 	u = philo->diner_id + 1;
 	next = u % philo->diet[PHILOSOPHERS] + 1;
-	printf("%u is thinking\n", u);
+	printf("%f %u is thinking\n", philo_timestamp_ms(philo->meal_start), u);
 	if (u % 2 == 0)
 		usleep(philo->diet[TIME_TO_EAT] * 1000);
 	while (42)
@@ -42,7 +41,7 @@ void	*philo_a_la_carte(void *arguments)
 	philo = (t_diner *)arguments;
 	u = philo->diner_id + 1;
 	next = u % philo->diet[PHILOSOPHERS] + 1;
-	printf("%u is thinking\n", u);
+	printf("%f %u is thinking\n", philo_timestamp_ms(philo->meal_start), u);
 	if (u % 2 == 0)
 		usleep(philo->diet[TIME_TO_EAT] * 1000);
 	while (philo->diet[MEALS])

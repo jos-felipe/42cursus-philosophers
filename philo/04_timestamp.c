@@ -6,18 +6,18 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/31 11:35:47 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/07/31 16:15:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static double	philo_timestamp_ms(struct timeval meal_start)
+double	philo_timestamp_ms(struct timeval meal_start)
 {
 	double			t0;
 	double			t1;
 	struct timeval	tv;
-	
+
 	t0 = (double)meal_start.tv_sec * (double)1000;
 	t0 += (double)meal_start.tv_usec / (double)1000;
 	assert(!gettimeofday(&tv, NULL));
@@ -26,12 +26,13 @@ static double	philo_timestamp_ms(struct timeval meal_start)
 	return (t1 - t0);
 }
 
-void			philo_timestamp_eat_sleep_think(t_diner *philo, \
+void	philo_timestamp_eat_sleep_think(t_diner *philo, \
 unsigned int u, unsigned int next)
 {
 	philo->forks[u - 1] = 0;
 	philo->forks[next - 1] = 0;
-	printf("%f %u has taken a fork\n", philo_timestamp_ms(philo->meal_start), u);
+	printf("%f %u has taken a fork\n", \
+	philo_timestamp_ms(philo->meal_start), u);
 	printf("%f %u is eating\n", philo_timestamp_ms(philo->meal_start), u);
 	usleep(philo->diet[TIME_TO_EAT] * 1000);
 	philo->forks[u - 1] = 1;
