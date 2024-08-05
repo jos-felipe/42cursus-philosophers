@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/07/29 17:11:21 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/05 14:36:28 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,12 @@ PROGRAM_NAME = philo
 
 NAME = ${PROGRAM_NAME}
 ARGS = 4 200 400 201 3
+ARGS_HELGRIND = 2 200 400 201 1
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -g3
 ifdef WITH_DEBUG
-  NAME = ${PROJECT_NAME}_debug
+  NAME = ${PROGRAM_NAME}_debug
   CFLAGS = ${DFLAGS}
 endif
 
@@ -27,7 +28,7 @@ INCLUDE_PATH = philo.h
 INCLUDE = ${notdir $(INCLUDE_PATH)}
 
 SRC_DIR = ./
-SRC_PATH = main.c 01_args_utils.c 01_args.c 02_buffet_utils.c 02_buffet.c 03_start_the_meal.c 04_timestamp.c
+SRC_PATH = main.c 01_args_utils.c 01_args.c 02_buffet_utils.c 02_buffet.c 03_diners.c
 SRC = ${notdir $(SRC_PATH)}
 
 OBJ_DIR = ./obj
@@ -73,8 +74,12 @@ memcheck: all
 
 faultcheck: all
 	valgrind -s --track-origins=yes ./${NAME} ${ARGS}
-	
+
+dataracescheck: all
+	valgrind -q --tool=helgrind --log-file=valgrind.log ./${NAME} ${ARGS_HELGRIND}
+	sh qa/mem_check.sh
+
 run: all
 	./${NAME} ${ARGS}
 
-.PHONY: all clean fclean re debug print memcheck faultcheck run 
+.PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run 
