@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/05 13:40:25 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:38:24 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	philo_fill_the_list_of_diners(t_buffet *host, unsigned int n)
 	philo_memcheck(host->list_of_diners);
 }
 
-void	philo_buffet_preparation(t_buffet *host, \
-unsigned int *args)
+void	philo_buffet_preparation(t_buffet *host)
 {
 	unsigned int	u;
 
@@ -40,9 +39,6 @@ unsigned int *args)
 		host->forks[u] = 1;
 		u++;
 	}
-	host->service = philo_all_you_can_eat;
-	if (args[MEALS])
-		host->service = philo_a_la_carte;
 	assert(!gettimeofday(&host->meal_start, NULL));
 }
 
