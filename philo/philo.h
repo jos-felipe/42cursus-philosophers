@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/05 12:59:26 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:42:48 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void			philo_buffet_closing(t_buffet *spaghetti, unsigned int n);
 void			philo_memcheck(void *ptr);
 void			philo_buffet_newdiner(t_buffet *host, \
 unsigned int *args, unsigned int u);
+void			*philo_buffet_service(void *arguments);
 
 // 03_start_the_meal.c
 void			*philo_all_you_can_eat(void *arguments);
