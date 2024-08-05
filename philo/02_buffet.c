@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/05 12:16:32 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:00:15 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ void	philo_fill_the_list_of_diners(t_buffet *host, unsigned int n)
 void	philo_buffet_preparation(t_buffet *host, \
 unsigned int *args)
 {
-	unsigned int u;
-	
-	host->mutex = (pthread_mutex_t *)malloc(host->seats * sizeof(pthread_mutex_t));
+	unsigned int	u;
+
+	host->mutex = (pthread_mutex_t *)malloc(host->seats * \
+	sizeof(pthread_mutex_t));
 	philo_memcheck(host->mutex);
 	host->forks = (int *)malloc(host->seats * sizeof(int));
 	philo_memcheck(host->forks);
@@ -64,7 +65,7 @@ unsigned int *args)
 	pthread_mutex_unlock(host->mutex);
 }
 
-void	philo_start_feeding(t_buffet *spaghetti, unsigned int n)
+void	philo_buffet_closing(t_buffet *spaghetti, unsigned int n)
 {
 	unsigned int	u;
 	int				result_code;

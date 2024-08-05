@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/05 12:15:13 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/05 12:59:26 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_diner
 	int				*forks;
 	pthread_t		diner;
 	struct timeval	meal_start;
-	pthread_mutex_t *mutex;
+	pthread_mutex_t	*mutex;
 }				t_diner;
 
 typedef struct s_buffet
@@ -60,7 +60,7 @@ typedef struct s_buffet
 	t_diner			*list_of_diners;
 	struct timeval	meal_start;
 	void			*service;
-	pthread_mutex_t *mutex;
+	pthread_mutex_t	*mutex;
 }				t_buffet;
 // 01_args.c
 void			philo_validate_argc(int argc);
@@ -71,17 +71,15 @@ void			philo_assignment_args(int argc, char *argv[], \
 // 01_args_utils.c
 unsigned int	ft_atou(const char *nptr);
 
-// 02_philo_to_data.c
-void			philo_allocation(t_philo *data, unsigned int *args);
-void			philo_dallocation(t_philo *data, unsigned int n);
+// 02_buffet.c
 void			philo_fill_the_list_of_diners(t_buffet *host, unsigned int n);
+void			philo_buffet_preparation(t_buffet *host, \
+unsigned int *args);
 void			philo_set_the_table(t_buffet *host, unsigned int *args);
-void			philo_start_feeding(t_buffet *spaghetti, unsigned int n);
+void			philo_buffet_closing(t_buffet *spaghetti, unsigned int n);
 
 // 02_buffet_utils.c
 void			philo_memcheck(void *ptr);
-void			philo_buffet_preparation(t_buffet *host, \
-unsigned int *args);
 void			philo_buffet_newdiner(t_buffet *host, \
 unsigned int *args, unsigned int u);
 
@@ -89,9 +87,9 @@ unsigned int *args, unsigned int u);
 void			*philo_all_you_can_eat(void *arguments);
 void			*philo_a_la_carte(void *arguments);
 
-// 04_timestamp.c
+// 04_diners.c
+double			philo_timestamp_ms(struct timeval meal_start);
 void			philo_timestamp_eat_sleep_think(t_diner *philo, \
 unsigned int u, unsigned int next);
-double			philo_timestamp_ms(struct timeval meal_start);
 
 #endif
