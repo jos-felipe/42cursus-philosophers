@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/31 15:45:14 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/05 12:15:13 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_diner
 	int				*forks;
 	pthread_t		diner;
 	struct timeval	meal_start;
+	pthread_mutex_t *mutex;
 }				t_diner;
 
 typedef struct s_buffet
@@ -58,6 +59,8 @@ typedef struct s_buffet
 	int				*forks;
 	t_diner			*list_of_diners;
 	struct timeval	meal_start;
+	void			*service;
+	pthread_mutex_t *mutex;
 }				t_buffet;
 // 01_args.c
 void			philo_validate_argc(int argc);
@@ -77,6 +80,10 @@ void			philo_start_feeding(t_buffet *spaghetti, unsigned int n);
 
 // 02_buffet_utils.c
 void			philo_memcheck(void *ptr);
+void			philo_buffet_preparation(t_buffet *host, \
+unsigned int *args);
+void			philo_buffet_newdiner(t_buffet *host, \
+unsigned int *args, unsigned int u);
 
 // 03_start_the_meal.c
 void			*philo_all_you_can_eat(void *arguments);

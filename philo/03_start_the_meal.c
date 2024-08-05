@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/31 15:42:57 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/05 11:46:37 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ void	*philo_a_la_carte(void *arguments)
 	if (u % 2 == 0)
 		usleep(philo->diet[TIME_TO_EAT] * 1000);
 	while (philo->diet[MEALS])
-	{
-		if (philo->forks[u - 1] && philo->forks[next - 1])
-			philo_timestamp_eat_sleep_think(philo, u, next);
-	}
+		philo_timestamp_eat_sleep_think(philo, u, next);
 	return (NULL);
 }
