@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/05 13:00:15 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:24:37 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ unsigned int *args)
 {
 	unsigned int	u;
 
-	host->mutex = (pthread_mutex_t *)malloc(host->seats * \
-	sizeof(pthread_mutex_t));
+	host->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	philo_memcheck(host->mutex);
+	pthread_mutex_init(host->mutex, NULL);
 	host->forks = (int *)malloc(host->seats * sizeof(int));
 	philo_memcheck(host->forks);
 	u = 0;
@@ -79,5 +79,6 @@ void	philo_buffet_closing(t_buffet *spaghetti, unsigned int n)
 	}
 	free(spaghetti->forks);
 	free(spaghetti->list_of_diners);
+	pthread_mutex_destroy(spaghetti->mutex);
 	free(spaghetti->mutex);
 }
