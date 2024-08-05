@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/05 13:05:19 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/05 13:08:42 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,8 +75,8 @@ memcheck: all
 faultcheck: all
 	valgrind -s --track-origins=yes ./${NAME} ${ARGS}
 
-dataracescheck: debug
-	valgrind -q --tool=helgrind ./${NAME} ${ARGS_HELGRIND}
+dataracescheck: all
+	valgrind -q --tool=helgrind --log-file=valgrind.log ./${NAME} ${ARGS_HELGRIND}
 	sh qa/mem_check.sh
 
 run: all
