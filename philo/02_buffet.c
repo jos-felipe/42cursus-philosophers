@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/05 14:38:24 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 10:16:53 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,16 @@ void	philo_buffet_preparation(t_buffet *host)
 	pthread_mutex_init(host->mutex, NULL);
 	host->forks = (int *)malloc(host->seats * sizeof(int));
 	philo_memcheck(host->forks);
+	host->last_meal = (struct timeval *)malloc(host->seats * sizeof(struct timeval));
+	philo_memcheck(host->last_meal);
+	assert(!gettimeofday(&host->meal_start, NULL));
 	u = 0;
 	while (u < host->seats)
 	{
 		host->forks[u] = 1;
+		host->last_meal[u] = host->meal_start;
 		u++;
 	}
-	assert(!gettimeofday(&host->meal_start, NULL));
 }
 
 void	philo_set_the_table(t_buffet *host, \

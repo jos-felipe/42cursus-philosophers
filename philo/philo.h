@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/05 14:41:28 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 09:53:23 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_diner
 	int				*forks;
 	pthread_mutex_t	*mutex;
 	pthread_t		diner;
+	struct timeval	*last_meal;
 	struct timeval	meal_start;
 	unsigned int	diner_id;
 	unsigned int	diet[N_ARGS];
@@ -52,6 +53,7 @@ typedef struct s_buffet
 {
 	int				*forks;
 	pthread_mutex_t	*mutex;
+	struct timeval	*last_meal;
 	struct timeval	meal_start;
 	t_diner			*list_of_diners;
 	unsigned int	seats;
