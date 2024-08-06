@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   04_timestamp.c                                     :+:      :+:    :+:   */
+/*   03_diners.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/05 12:18:56 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:37:42 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ unsigned int u, unsigned int next)
 		usleep(philo->diet[TIME_TO_EAT] * 1000);
 		philo->forks[u - 1] = 1;
 		philo->forks[next - 1] = 1;
+		assert(!gettimeofday(&philo->last_meal[u - 1], NULL));
 		pthread_mutex_unlock(philo->mutex);
 		if (philo->diet[MEALS])
 			philo->diet[MEALS] -= 1;
@@ -47,4 +48,25 @@ unsigned int u, unsigned int next)
 		usleep(philo->diet[TIME_TO_SLEEP] * 1000);
 		printf("%f %u is thinking\n", philo_timestamp_ms(philo->meal_start), u);
 	}
+}
+
+void	*philo_diners_service(void *arguments)
+{
+	t_diner			*philo;
+	unsigned int	u;
+	unsigned int	next;
+
+	philo = (t_diner *)arguments;
+	u = philo->diner_id + 1;
+	next = u % philo->diet[PHILOSOPHERS] + 1;
+	pthread_mutex_lock(philo->mutex);
+	printf("%f %u is thinking\n", philo_timestamp_ms(philo->meal_start), u);
+	pthread_mutex_unlock(philo->mutex);
+	if (u % 2 == 0)
+		usleep(philo->diet[TIME_TO_EAT] * 1000);
+	while (!philo->diet[MEALS])
+		philo_timestamp_eat_sleep_think(philo, u, next);
+	while (philo->diet[MEALS])
+		philo_timestamp_eat_sleep_think(philo, u, next);
+	return (NULL);
 }

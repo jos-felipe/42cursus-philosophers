@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 10:16:53 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:38:25 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ unsigned int *args)
 	{
 		philo_buffet_newdiner(host, args, u);
 		result_code = pthread_create(&host->list_of_diners[u].diner, \
-		NULL, philo_buffet_service, &host->list_of_diners[u]);
+		NULL, philo_diners_service, &host->list_of_diners[u]);
 		assert(!result_code);
 		u++;
 	}

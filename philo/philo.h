@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 09:53:23 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:38:49 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void			philo_buffet_closing(t_buffet *spaghetti, unsigned int n);
 void			philo_memcheck(void *ptr);
 void			philo_buffet_newdiner(t_buffet *host, \
 unsigned int *args, unsigned int u);
-void			*philo_buffet_service(void *arguments);
 
 // 03_diners.c
+void			*philo_diners_service(void *arguments);
 double			philo_timestamp_ms(struct timeval meal_start);
 void			philo_timestamp_eat_sleep_think(t_diner *philo, \
 unsigned int u, unsigned int next);
