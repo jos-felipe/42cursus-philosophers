@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 14:29:17 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:55:47 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static int	philo_the_reaper_scythe(t_buffet *host)
 	assert(!gettimeofday(&tv, NULL));
 	t0 = (double)tv.tv_sec * (double)1000;
 	t0 += (double)tv.tv_usec / (double)1000;
-	pthread_mutex_lock(host->mutex);
 	u = 0;
 	while (u < host->seats)
 	{
@@ -32,12 +31,12 @@ static int	philo_the_reaper_scythe(t_buffet *host)
 		if (t1 < t0)
 		{
 			printf("%f %u died\n", philo_timestamp_ms(host->meal_start), u);
+			host->exit_signal = 1;
 			break ;
 		}
 		u++;
 	}
-	pthread_mutex_unlock(host->mutex);
-	return ((t1 < t0));
+	return (t1 < t0);
 }
 
 void		*philo_the_reaper_service(void *arguments)
@@ -45,11 +44,18 @@ void		*philo_the_reaper_service(void *arguments)
 	t_buffet	*host;
 	
 	host = (t_diner *)arguments;
+	pthread_mutex_lock(host->mutex);
 	while (42)
 	{
-		if(philo_the_reaper_scythe(host))
+		pthread_mutex_lock(host->mutex);
+		if(host->exit_signal || philo_the_reaper_scythe(host))
 			break ;
+		pthread_mutex_unlock(host->mutex);
 	}
-	host->death_alarm = 1;
+	pthread_mutex_unlock(host->mutex);
+	pthread_mutex_destroy(host->mutex);
+	free(host->forks);
+	free(host->list_of_diners);
+	free(host->mutex);
 	return (NULL);
 }

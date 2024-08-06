@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 14:32:03 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:57:48 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,9 @@ unsigned int *args)
 	}
 	pthread_mutex_unlock(host->mutex);
 	host->time_to_die = args[TIME_TO_DIE];
-	host->death_alarm = 0;
+	host->exit_signal = 0;
 	result_code = pthread_create(&host->reaper, \
 	NULL, philo_the_reaper_service, host);
-	assert(!result_code);
-	result_code = pthread_detach(host->reaper);
 	assert(!result_code);
 }
 
@@ -83,8 +81,9 @@ void	philo_buffet_closing(t_buffet *host)
 		assert(!result_code);
 		u++;
 	}
-	free(host->forks);
-	free(host->list_of_diners);
-	pthread_mutex_destroy(host->mutex);
-	free(host->mutex);
+	pthread_mutex_lock(host->mutex);
+	host->exit_signal = 1;
+	pthread_mutex_unlock(host->mutex);
+	result_code = pthread_detach(host->reaper);
+	assert(!result_code);
 }

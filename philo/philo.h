@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 14:31:51 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:42:12 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ time_to_sleep (in milliseconds) \
 
 typedef struct s_diner
 {
-	char			*death_alarm;
+	char			*exit_signal;
 	int				*forks;
 	pthread_mutex_t	*mutex;
 	pthread_t		diner;
@@ -52,7 +52,7 @@ typedef struct s_diner
 
 typedef struct s_buffet
 {
-	char			death_alarm;
+	char			exit_signal;
 	int				*forks;
 	pthread_mutex_t	*mutex;
 	pthread_t		reaper;
