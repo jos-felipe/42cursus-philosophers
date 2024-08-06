@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 15:55:47 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:00:11 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,21 @@ void		*philo_the_reaper_service(void *arguments)
 {
 	t_buffet	*host;
 	
-	host = (t_diner *)arguments;
-	pthread_mutex_lock(host->mutex);
+	host = (t_buffet *)arguments;
 	while (42)
 	{
 		pthread_mutex_lock(host->mutex);
-		if(host->exit_signal || philo_the_reaper_scythe(host))
+		if (host->exit_signal)
+		{
+			pthread_mutex_unlock(host->mutex);
 			break ;
-		pthread_mutex_unlock(host->mutex);
+		}
+		else
+		{
+			philo_the_reaper_scythe(host);
+			pthread_mutex_unlock(host->mutex);
+		}
 	}
-	pthread_mutex_unlock(host->mutex);
 	pthread_mutex_destroy(host->mutex);
 	free(host->forks);
 	free(host->list_of_diners);

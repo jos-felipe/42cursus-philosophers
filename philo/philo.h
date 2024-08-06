@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 15:42:12 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:02:26 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ void			philo_timestamp_eat_sleep_think(t_diner *philo, \
 unsigned int u, unsigned int next);
 
 // 04_the_reaper.c
-void			philo_the_reaper_service(void *arguments);
+void			*philo_the_reaper_service(void *arguments);
 
 #endif
