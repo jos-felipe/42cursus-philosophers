@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 11:33:45 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:27:12 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	philo_memcheck(void *ptr)
 void	philo_buffet_newdiner(t_buffet *host, \
 unsigned int *args, unsigned int u)
 {
+	host->list_of_diners[u].death_alarm = &host->death_alarm;
 	host->list_of_diners[u].diner_id = u;
 	philo_set_diner_diet(&host->list_of_diners[u], args);
 	host->list_of_diners[u].forks = host->forks;

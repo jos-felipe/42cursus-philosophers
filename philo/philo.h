@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 11:38:49 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:31:51 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ time_to_sleep (in milliseconds) \
 
 typedef struct s_diner
 {
+	char			*death_alarm;
 	int				*forks;
 	pthread_mutex_t	*mutex;
 	pthread_t		diner;
@@ -51,12 +52,15 @@ typedef struct s_diner
 
 typedef struct s_buffet
 {
+	char			death_alarm;
 	int				*forks;
 	pthread_mutex_t	*mutex;
+	pthread_t		reaper;
 	struct timeval	*last_meal;
 	struct timeval	meal_start;
 	t_diner			*list_of_diners;
 	unsigned int	seats;
+	unsigned int	time_to_die;
 }				t_buffet;
 
 // 01_args.c
@@ -72,7 +76,7 @@ unsigned int	ft_atou(const char *nptr);
 void			philo_fill_the_list_of_diners(t_buffet *host, unsigned int n);
 void			philo_buffet_preparation(t_buffet *host);
 void			philo_set_the_table(t_buffet *host, unsigned int *args);
-void			philo_buffet_closing(t_buffet *spaghetti, unsigned int n);
+void			philo_buffet_closing(t_buffet *host);
 
 // 02_buffet_utils.c
 void			philo_memcheck(void *ptr);
@@ -84,5 +88,8 @@ void			*philo_diners_service(void *arguments);
 double			philo_timestamp_ms(struct timeval meal_start);
 void			philo_timestamp_eat_sleep_think(t_diner *philo, \
 unsigned int u, unsigned int next);
+
+// 04_the_reaper.c
+void			philo_the_reaper_service(void *arguments);
 
 #endif

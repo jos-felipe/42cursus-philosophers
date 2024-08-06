@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 11:38:25 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:32:03 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,22 +62,29 @@ unsigned int *args)
 		u++;
 	}
 	pthread_mutex_unlock(host->mutex);
+	host->time_to_die = args[TIME_TO_DIE];
+	host->death_alarm = 0;
+	result_code = pthread_create(&host->reaper, \
+	NULL, philo_the_reaper_service, host);
+	assert(!result_code);
+	result_code = pthread_detach(host->reaper);
+	assert(!result_code);
 }
 
-void	philo_buffet_closing(t_buffet *spaghetti, unsigned int n)
+void	philo_buffet_closing(t_buffet *host)
 {
 	unsigned int	u;
 	int				result_code;
 
 	u = 0;
-	while (u < n)
+	while (u < host->seats)
 	{
-		result_code = pthread_join(spaghetti->list_of_diners[u].diner, NULL);
+		result_code = pthread_join(host->list_of_diners[u].diner, NULL);
 		assert(!result_code);
 		u++;
 	}
-	free(spaghetti->forks);
-	free(spaghetti->list_of_diners);
-	pthread_mutex_destroy(spaghetti->mutex);
-	free(spaghetti->mutex);
+	free(host->forks);
+	free(host->list_of_diners);
+	pthread_mutex_destroy(host->mutex);
+	free(host->mutex);
 }

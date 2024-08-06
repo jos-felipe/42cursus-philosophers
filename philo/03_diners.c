@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 11:37:42 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:25:19 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ double	philo_timestamp_ms(struct timeval meal_start)
 void	philo_timestamp_eat_sleep_think(t_diner *philo, \
 unsigned int u, unsigned int next)
 {
-	pthread_mutex_lock(philo->mutex);
 	if (philo->forks[u - 1] && philo->forks[next - 1])
 	{
 		philo->forks[u - 1] = 0;
@@ -64,9 +63,10 @@ void	*philo_diners_service(void *arguments)
 	pthread_mutex_unlock(philo->mutex);
 	if (u % 2 == 0)
 		usleep(philo->diet[TIME_TO_EAT] * 1000);
-	while (!philo->diet[MEALS])
+	pthread_mutex_lock(philo->mutex);
+	while (!philo->diet[MEALS] && !*philo->death_alarm)
 		philo_timestamp_eat_sleep_think(philo, u, next);
-	while (philo->diet[MEALS])
+	while (philo->diet[MEALS] && !*philo->death_alarm)
 		philo_timestamp_eat_sleep_think(philo, u, next);
 	return (NULL);
 }
