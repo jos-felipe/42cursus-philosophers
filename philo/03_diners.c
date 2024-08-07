@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/07 11:17:07 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:57:25 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ unsigned int u, unsigned int next)
 		philo->forks[u - 1] = 1;
 		philo->forks[next - 1] = 1;
 		philo->next_meal = philo_get_timestamp_ms(philo->diner_start) + \
-		pthread_mutex_unlock(philo->mutex);
 		philo->diet[TIME_TO_DIE];
+		pthread_mutex_unlock(philo->mutex);
 		if (philo->diet[MEALS])
 			philo->diet[MEALS] -= 1;
 		printf("%f %u is sleeping\n", philo_get_timestamp_ms(philo->diner_start), u);
