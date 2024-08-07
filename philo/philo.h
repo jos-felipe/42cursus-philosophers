@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 16:02:26 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:40:14 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ time_to_sleep (in milliseconds) \
 typedef struct s_diner
 {
 	char			*exit_signal;
+	double			next_meal;
 	int				*forks;
 	pthread_mutex_t	*mutex;
 	pthread_t		diner;
-	struct timeval	*last_meal;
-	struct timeval	meal_start;
-	unsigned int	diner_id;
+	struct timeval	diner_start;
 	unsigned int	diet[N_ARGS];
+	unsigned int	diner_id;
 }				t_diner;
 
 typedef struct s_buffet
@@ -56,8 +56,7 @@ typedef struct s_buffet
 	int				*forks;
 	pthread_mutex_t	*mutex;
 	pthread_t		reaper;
-	struct timeval	*last_meal;
-	struct timeval	meal_start;
+	struct timeval	diner_start;
 	t_diner			*list_of_diners;
 	unsigned int	seats;
 	unsigned int	time_to_die;
@@ -75,7 +74,7 @@ unsigned int	ft_atou(const char *nptr);
 // 02_buffet.c
 void			philo_fill_the_list_of_diners(t_buffet *host, unsigned int n);
 void			philo_buffet_preparation(t_buffet *host);
-void			philo_set_the_table(t_buffet *host, unsigned int *args);
+void			philo_buffet_set_the_table(t_buffet *host, unsigned int *args);
 void			philo_buffet_closing(t_buffet *host);
 
 // 02_buffet_utils.c
@@ -85,7 +84,7 @@ unsigned int *args, unsigned int u);
 
 // 03_diners.c
 void			*philo_diners_service(void *arguments);
-double			philo_timestamp_ms(struct timeval meal_start);
+double			philo_get_timestamp_ms(struct timeval start_time);
 void			philo_timestamp_eat_sleep_think(t_diner *philo, \
 unsigned int u, unsigned int next);
 

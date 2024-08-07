@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 17:02:26 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:06:21 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@ static int	philo_the_reaper_scythe(t_buffet *host)
 	u = 0;
 	while (u < host->seats)
 	{
-		t1 = (double)host->last_meal[u].tv_sec * (double)1000;
-		t1 += (double)host->last_meal[u].tv_usec / (double)1000;
-		t1 += (double)host->time_to_die;
+		t1 = host->list_of_diners[u].next_meal;
 		if (t1 < t0)
 		{
-			printf("%f %u died\n", philo_timestamp_ms(host->meal_start), u + 1);
+			printf("%f %u died\n", philo_get_timestamp_ms(host->diner_start), u + 1);
 			host->exit_signal = 1;
 			break ;
 		}

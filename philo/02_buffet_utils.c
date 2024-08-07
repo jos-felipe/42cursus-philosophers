@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 15:34:39 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:14:37 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@ void	philo_memcheck(void *ptr)
 void	philo_buffet_newdiner(t_buffet *host, \
 unsigned int *args, unsigned int u)
 {
-	host->list_of_diners[u].exit_signal = &host->exit_signal;
 	host->list_of_diners[u].diner_id = u;
-	philo_set_diner_diet(&host->list_of_diners[u], args);
+	host->list_of_diners[u].exit_signal = &host->exit_signal;
 	host->list_of_diners[u].forks = host->forks;
-	host->list_of_diners[u].last_meal = host->last_meal;
-	host->list_of_diners[u].meal_start = host->meal_start;
+	host->list_of_diners[u].next_meal = philo_timeval_to_ms(host->diner_start) + \
+	(double)args[TIME_TO_DIE];
+	host->list_of_diners[u].diner_start = host->diner_start;
 	host->list_of_diners[u].mutex = host->mutex;
+	philo_set_diner_diet(&host->list_of_diners[u], args);
 }

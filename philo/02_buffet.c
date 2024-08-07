@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/06 15:57:48 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:18:03 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,24 @@ void	philo_buffet_preparation(t_buffet *host)
 	pthread_mutex_init(host->mutex, NULL);
 	host->forks = (int *)malloc(host->seats * sizeof(int));
 	philo_memcheck(host->forks);
-	host->last_meal = (struct timeval *)malloc(host->seats * sizeof(struct timeval));
-	philo_memcheck(host->last_meal);
-	assert(!gettimeofday(&host->meal_start, NULL));
 	u = 0;
 	while (u < host->seats)
 	{
 		host->forks[u] = 1;
-		host->last_meal[u] = host->meal_start;
 		u++;
 	}
+	assert(!gettimeofday(&host->diner_start, NULL));
 }
 
-void	philo_set_the_table(t_buffet *host, \
+void	philo_buffet_set_the_table(t_buffet *host, \
 unsigned int *args)
 {
 	unsigned int	u;
 	int				result_code;
 
 	pthread_mutex_lock(host->mutex);
+	host->time_to_die = args[TIME_TO_DIE];
+	host->exit_signal = 0;
 	u = 0;
 	while (u < host->seats)
 	{
@@ -61,12 +60,10 @@ unsigned int *args)
 		assert(!result_code);
 		u++;
 	}
-	pthread_mutex_unlock(host->mutex);
-	host->time_to_die = args[TIME_TO_DIE];
-	host->exit_signal = 0;
 	result_code = pthread_create(&host->reaper, \
 	NULL, philo_the_reaper_service, host);
 	assert(!result_code);
+	pthread_mutex_unlock(host->mutex);
 }
 
 void	philo_buffet_closing(t_buffet *host)
