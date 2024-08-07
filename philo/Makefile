@@ -6,15 +6,15 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/05 14:36:28 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/07 16:41:09 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PROGRAM_NAME = philo
 
 NAME = ${PROGRAM_NAME}
-ARGS = 4 200 400 201 3
-ARGS_HELGRIND = 2 200 400 201 1
+ARGS = 4 400 200 201 3
+ARGS_HELGRIND = 4 400 200 201 3
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -g3
@@ -28,7 +28,7 @@ INCLUDE_PATH = philo.h
 INCLUDE = ${notdir $(INCLUDE_PATH)}
 
 SRC_DIR = ./
-SRC_PATH = main.c 01_args_utils.c 01_args.c 02_buffet_utils.c 02_buffet.c 03_diners.c
+SRC_PATH = main.c 01_args_utils.c 01_args.c 02_buffet_utils.c 02_buffet.c 03_diners.c 03_diners_utils.c 04_the_reaper.c
 SRC = ${notdir $(SRC_PATH)}
 
 OBJ_DIR = ./obj

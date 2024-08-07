@@ -1,50 +1,96 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   04_timestamp.c                                     :+:      :+:    :+:   */
+/*   03_diners.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/05 12:18:56 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:51:31 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-double	philo_timestamp_ms(struct timeval meal_start)
+void	philo_printf(char *state_fmt, t_diner *philo, \
+unsigned int u)
 {
-	double			t0;
-	double			t1;
-	struct timeval	tv;
+	double	timestamp;
 
-	t0 = (double)meal_start.tv_sec * (double)1000;
-	t0 += (double)meal_start.tv_usec / (double)1000;
-	assert(!gettimeofday(&tv, NULL));
-	t1 = (double)tv.tv_sec * (double)1000;
-	t1 += (double)tv.tv_usec / (double)1000;
-	return (t1 - t0);
+	pthread_mutex_lock(philo->mutex);
+	timestamp = philo_get_timestamp_in_ms(philo->diner_start);
+	printf(state_fmt, timestamp, u);
+	pthread_mutex_unlock(philo->mutex);
+}
+
+double	philo_get_timestamp_in_ms(struct timeval tic)
+{
+	double			tic_toc;
+	struct timeval	toc;
+
+	assert(!gettimeofday(&toc, NULL));
+	tic_toc = (double)(toc.tv_sec - tic.tv_sec);
+	tic_toc *= 1000.0;
+	tic_toc += (double)(toc.tv_usec) / 1000.0;
+	tic_toc -= (double)(tic.tv_usec) / 1000.0;
+	return (tic_toc);
 }
 
 void	philo_timestamp_eat_sleep_think(t_diner *philo, \
 unsigned int u, unsigned int next)
 {
-	pthread_mutex_lock(philo->mutex);
+	double	toc;
+
 	if (philo->forks[u - 1] && philo->forks[next - 1])
 	{
 		philo->forks[u - 1] = 0;
 		philo->forks[next - 1] = 0;
-		printf("%f %u has taken a fork\n", \
-		philo_timestamp_ms(philo->meal_start), u);
-		printf("%f %u is eating\n", philo_timestamp_ms(philo->meal_start), u);
+		toc = philo_get_timestamp_in_ms(philo->diner_start);
+		printf("%f %u has taken a fork\n", toc, u);
+		toc = philo_get_timestamp_in_ms(philo->diner_start);
+		philo->next_meal_in_ms = philo_update_next_meal(toc, philo->diet) + \
+		(double)philo->diet[TIME_TO_EAT];
+		printf("%f %u is eating\n", toc, u);
+		pthread_mutex_unlock(philo->mutex);
 		usleep(philo->diet[TIME_TO_EAT] * 1000);
+		pthread_mutex_lock(philo->mutex);
 		philo->forks[u - 1] = 1;
 		philo->forks[next - 1] = 1;
-		pthread_mutex_unlock(philo->mutex);
 		if (philo->diet[MEALS])
 			philo->diet[MEALS] -= 1;
-		printf("%f %u is sleeping\n", philo_timestamp_ms(philo->meal_start), u);
+		pthread_mutex_unlock(philo->mutex);
+		philo_printf("%f %u is sleeping\n", philo, u);
 		usleep(philo->diet[TIME_TO_SLEEP] * 1000);
-		printf("%f %u is thinking\n", philo_timestamp_ms(philo->meal_start), u);
+		philo_printf("%f %u is thinking\n", philo, u);
+		pthread_mutex_lock(philo->mutex);
 	}
+}
+
+void	*philo_diners_service(void *arguments)
+{
+	t_diner			*philo;
+	unsigned int	u;
+	unsigned int	next;
+
+	philo = (t_diner *)arguments;
+	u = philo->diner_id + 1;
+	next = u % philo->diet[PHILOSOPHERS] + 1;
+	philo_printf("%f %u is sleeping\n", philo, u);
+	if (u % 2 == 0)
+		usleep(philo->diet[TIME_TO_EAT] * 1000);
+	while (philo->diet[MEALS])
+	{
+		pthread_mutex_lock(philo->mutex);
+		if (*philo->exit_signal)
+		{
+			pthread_mutex_unlock(philo->mutex);
+			break ;
+		}
+		else
+		{
+			philo_timestamp_eat_sleep_think(philo, u, next);
+			pthread_mutex_unlock(philo->mutex);
+		}
+	}
+	return (NULL);
 }
