@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/07 16:24:37 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:42:28 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,15 @@ void			philo_buffet_newdiner(t_buffet *host, \
 unsigned int *args, unsigned int u);
 
 // 03_diners.c
-void			*philo_diners_service(void *arguments);
 double			philo_get_timestamp_in_ms(struct timeval tic);
+void			*philo_diners_service(void *arguments);
+void			philo_printf(char *state_fmt, t_diner *philo, \
+unsigned int u);
 void			philo_timestamp_eat_sleep_think(t_diner *philo, \
 unsigned int u, unsigned int next);
+
+// 03_diners_utils.c
+void			*philo_diners_all_you_can_eat(void *arguments);
 
 // 04_the_reaper.c
 void			*philo_the_reaper_service(void *arguments);
