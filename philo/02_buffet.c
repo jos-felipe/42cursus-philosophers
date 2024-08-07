@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/07 13:13:02 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:03:11 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,8 @@ void	philo_buffet_closing(t_buffet *host)
 	pthread_mutex_unlock(host->mutex);
 	result_code = pthread_detach(host->reaper);
 	assert(!result_code);
+	pthread_mutex_destroy(host->mutex);
+	free(host->forks);
+	free(host->list_of_diners);
+	free(host->mutex);
 }

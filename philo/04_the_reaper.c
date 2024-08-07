@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/07 13:40:59 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:02:57 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,5 @@ void		*philo_the_reaper_service(void *arguments)
 			pthread_mutex_unlock(host->mutex);
 		}
 	}
-	pthread_mutex_destroy(host->mutex);
-	free(host->forks);
-	free(host->list_of_diners);
-	free(host->mutex);
 	return (NULL);
 }
