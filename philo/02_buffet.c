@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/07 13:05:26 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/07 13:13:02 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ unsigned int *args)
 	int				result_code;
 
 	pthread_mutex_lock(host->mutex);
-	host->time_to_die_in_sec = (double)args[TIME_TO_DIE] / (double)1000;
 	host->exit_signal = 0;
 	u = 0;
 	while (u < host->seats)

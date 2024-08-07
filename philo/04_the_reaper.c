@@ -6,35 +6,31 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/07 13:01:01 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/07 13:40:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	philo_the_reaper_scythe(t_buffet *host)
+static void	philo_the_reaper_scythe(t_buffet *host)
 {
 	double			t0;
 	double			t1;
-	struct timeval	tv;
 	unsigned int	u;
 
-	assert(!gettimeofday(&tv, NULL));
-	t0 = (double)tv.tv_sec * (double)1000;
-	t0 += (double)tv.tv_usec / (double)1000;
+	t0 = philo_get_timestamp_in_ms(host->diner_start);
 	u = 0;
 	while (u < host->seats)
 	{
-		t1 = host->list_of_diners[u].next_meal;
+		t1 = host->list_of_diners[u].next_meal_in_ms;
 		if (t1 < t0)
 		{
-			printf("%f %u died\n", philo_get_timestamp_in_sec(host->diner_start), u + 1);
+			printf("%f %u died\n", philo_get_timestamp_in_ms(host->diner_start), u + 1);
 			host->exit_signal = 1;
 			break ;
 		}
 		u++;
 	}
-	return (t1 < t0);
 }
 
 void		*philo_the_reaper_service(void *arguments)
