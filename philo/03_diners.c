@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/07 16:24:11 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:51:31 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ unsigned int u)
 {
 	double	timestamp;
 
+	pthread_mutex_lock(philo->mutex);
 	timestamp = philo_get_timestamp_in_ms(philo->diner_start);
 	printf(state_fmt, timestamp, u);
+	pthread_mutex_unlock(philo->mutex);
 }
 
 double	philo_get_timestamp_in_ms(struct timeval tic)
