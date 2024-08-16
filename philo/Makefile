@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
+#    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/16 11:40:42 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/16 16:48:38 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PROGRAM_NAME = philo
 
 NAME = ${PROGRAM_NAME}
-ARGS = 4 400 200 201 3
+ARGS = 4 400 200 201
 ARGS_HELGRIND = 4 400 200 201 3
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

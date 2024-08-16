@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_diners_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 12:05:58 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:57:33 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,37 @@ void	*philo_diners_all_you_can_eat(void *arguments)
 		}
 		else
 		{
-			philo_eat_sleep_think(philo, u, next);
 			pthread_mutex_unlock(philo->mutex);
+			philo_eat_sleep_think(philo, u, next);
+		}
+	}
+	return (NULL);
+}
+
+void	*philo_diners_service(void *arguments)
+{
+	t_diner			*philo;
+	unsigned int	u;
+	unsigned int	next;
+
+	philo = (t_diner *)arguments;
+	u = philo->diner_id + 1;
+	next = u % philo->diet[PHILOSOPHERS] + 1;
+	philo_printf("%d %u is thinking\n", philo, u);
+	if (u % 2 == 0)
+		usleep(philo->diet[TIME_TO_EAT] * 1000);
+	while (philo->diet[MEALS])
+	{
+		pthread_mutex_lock(philo->mutex);
+		if (*philo->exit_signal)
+		{
+			pthread_mutex_unlock(philo->mutex);
+			break ;
+		}
+		else
+		{
+			pthread_mutex_unlock(philo->mutex);
+			philo_eat_sleep_think(philo, u, next);
 		}
 	}
 	return (NULL);
