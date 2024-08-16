@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   04_the_reaper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 09:47:04 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:59:03 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	philo_the_reaper_scythe(t_buffet *host);
+
+void	*philo_the_reaper_service(void *arguments)
+{
+	t_buffet	*host;
+
+	host = (t_buffet *)arguments;
+	while (42)
+	{
+		pthread_mutex_lock(host->mutex);
+		if (host->exit_signal)
+		{
+			pthread_mutex_unlock(host->mutex);
+			break ;
+		}
+		else
+		{
+			philo_the_reaper_scythe(host);
+			pthread_mutex_unlock(host->mutex);
+		}
+	}
+	return (NULL);
+}
 
 static void	philo_the_reaper_scythe(t_buffet *host)
 {
@@ -33,26 +57,4 @@ static void	philo_the_reaper_scythe(t_buffet *host)
 		}
 		u++;
 	}
-}
-
-void	*philo_the_reaper_service(void *arguments)
-{
-	t_buffet	*host;
-
-	host = (t_buffet *)arguments;
-	while (42)
-	{
-		pthread_mutex_lock(host->mutex);
-		if (host->exit_signal)
-		{
-			pthread_mutex_unlock(host->mutex);
-			break ;
-		}
-		else
-		{
-			philo_the_reaper_scythe(host);
-			pthread_mutex_unlock(host->mutex);
-		}
-	}
-	return (NULL);
 }

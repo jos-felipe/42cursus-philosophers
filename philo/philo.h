@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 12:05:16 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:59:29 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ unsigned int *args, unsigned int u);
 
 // 03_diners.c
 double			philo_get_timestamp_in_ms(struct timeval tic);
-void			*philo_diners_service(void *arguments);
 void			philo_printf(char *state_fmt, t_diner *philo, \
 unsigned int u);
 void			philo_eat_sleep_think(t_diner *philo, \
@@ -92,6 +91,7 @@ unsigned int u, unsigned int next);
 
 // 03_diners_utils.c
 void			*philo_diners_all_you_can_eat(void *arguments);
+void			*philo_diners_service(void *arguments);
 
 // 04_the_reaper.c
 void			*philo_the_reaper_service(void *arguments);
