@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/07 16:39:55 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:45:33 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,14 @@ void	philo_buffet_preparation(t_buffet *host)
 	pthread_mutex_init(host->mutex, NULL);
 	host->forks = (int *)malloc(host->seats * sizeof(int));
 	philo_memcheck(host->forks);
+	host->forks_state = (pthread_mutex_t *)malloc(\
+	host->seats * sizeof(pthread_mutex_t));
+	philo_memcheck(host->forks_state);
 	u = 0;
 	while (u < host->seats)
 	{
 		host->forks[u] = 1;
+		pthread_mutex_init(&host->forks_state[u], NULL);
 		u++;
 	}
 	assert(!gettimeofday(&host->diner_start, NULL));
