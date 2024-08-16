@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/07 16:41:09 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/16 11:40:42 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ ARGS = 4 400 200 201 3
 ARGS_HELGRIND = 4 400 200 201 3
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-DFLAGS = -g3
+DFLAGS = -g3 -fsanitize=address
 ifdef WITH_DEBUG
   NAME = ${PROGRAM_NAME}_debug
   CFLAGS = ${DFLAGS}
@@ -82,4 +82,7 @@ dataracescheck: all
 run: all
 	./${NAME} ${ARGS}
 
-.PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run 
+sanatize: debug
+	./${PROGRAM_NAME}_debug ${ARGS}
+
+.PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run sanatize

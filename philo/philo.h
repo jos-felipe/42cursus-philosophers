@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/07 16:42:28 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:05:16 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_diner
 {
 	char			*exit_signal;
 	double			next_meal_in_ms;
-	int				*forks;
+	pthread_mutex_t	*forks_state;
 	pthread_mutex_t	*mutex;
 	pthread_t		diner;
 	struct timeval	diner_start;
@@ -53,7 +53,7 @@ typedef struct s_diner
 typedef struct s_buffet
 {
 	char			exit_signal;
-	int				*forks;
+	pthread_mutex_t	*forks_state;
 	pthread_mutex_t	*mutex;
 	pthread_t		reaper;
 	struct timeval	diner_start;
@@ -87,7 +87,7 @@ double			philo_get_timestamp_in_ms(struct timeval tic);
 void			*philo_diners_service(void *arguments);
 void			philo_printf(char *state_fmt, t_diner *philo, \
 unsigned int u);
-void			philo_timestamp_eat_sleep_think(t_diner *philo, \
+void			philo_eat_sleep_think(t_diner *philo, \
 unsigned int u, unsigned int next);
 
 // 03_diners_utils.c

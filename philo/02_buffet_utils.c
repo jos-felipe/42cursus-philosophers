@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/07 16:13:06 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:03:33 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ double	philo_update_next_meal(double last_meal_in_ms, unsigned int *diet)
 	double	next_meal_in_ms;
 
 	next_meal_in_ms = last_meal_in_ms;
-	next_meal_in_ms += (double)diet[TIME_TO_EAT];
 	next_meal_in_ms += (double)diet[TIME_TO_DIE];
 	return (next_meal_in_ms);
 }
@@ -49,9 +48,9 @@ unsigned int *args, unsigned int u)
 {
 	host->list_of_diners[u].diner_id = u;
 	host->list_of_diners[u].exit_signal = &host->exit_signal;
-	host->list_of_diners[u].forks = host->forks;
 	host->list_of_diners[u].next_meal_in_ms = (double)args[TIME_TO_DIE];
 	host->list_of_diners[u].diner_start = host->diner_start;
 	host->list_of_diners[u].mutex = host->mutex;
+	host->list_of_diners[u].forks_state = host->forks_state;
 	philo_set_diner_diet(&host->list_of_diners[u], args);
 }
