@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 09:49:34 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:00:36 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ unsigned int u, unsigned int next)
 		ts = (int)philo_get_timestamp_in_ms(philo->diner_start);
 		printf("%d %u has taken a fork\n", ts, u);
 		ts = (int)philo_get_timestamp_in_ms(philo->diner_start);
-		philo->next_meal_in_ms = philo_update_next_meal(ts, philo->diet) + \
-		(double)philo->diet[TIME_TO_EAT];
+		philo->next_meal_in_ms = philo_update_next_meal(ts, philo->diet);
 		printf("%d %u is eating\n", ts, u);
 		pthread_mutex_unlock(philo->mutex);
 		usleep(philo->diet[TIME_TO_EAT] * 1000);
@@ -75,7 +74,7 @@ void	*philo_diners_service(void *arguments)
 	philo = (t_diner *)arguments;
 	u = philo->diner_id + 1;
 	next = u % philo->diet[PHILOSOPHERS] + 1;
-	philo_printf("%d %u is sleeping\n", philo, u);
+	philo_printf("%d %u is thinking\n", philo, u);
 	if (u % 2 == 0)
 		usleep(philo->diet[TIME_TO_EAT] * 1000);
 	while (philo->diet[MEALS])

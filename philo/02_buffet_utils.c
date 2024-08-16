@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/07 16:13:06 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/16 09:57:12 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ double	philo_update_next_meal(double last_meal_in_ms, unsigned int *diet)
 	double	next_meal_in_ms;
 
 	next_meal_in_ms = last_meal_in_ms;
-	next_meal_in_ms += (double)diet[TIME_TO_EAT];
 	next_meal_in_ms += (double)diet[TIME_TO_DIE];
 	return (next_meal_in_ms);
 }
