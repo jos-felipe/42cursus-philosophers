@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 16:59:29 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/16 18:26:04 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ time_to_sleep (in milliseconds) \
 # define TIME_TO_EAT 2
 # define TIME_TO_SLEEP 3
 # define MEALS 4
+
+# define u_int unsigned int 
 
 typedef struct s_diner
 {
@@ -71,7 +73,8 @@ void			philo_assignment_args(int argc, char *argv[], \
 unsigned int	ft_atou(const char *nptr);
 
 // 02_buffet.c
-void			philo_fill_the_list_of_diners(t_buffet *host, unsigned int n);
+/* void			philo_fill_the_list_of_diners(t_buffet *host, unsigned int n); */
+int				philo_fill_the_list_of_diners(t_buffet *host, u_int *args);
 void			philo_buffet_preparation(t_buffet *host);
 void			philo_buffet_set_the_table(t_buffet *host, unsigned int *args);
 void			philo_buffet_closing(t_buffet *host);

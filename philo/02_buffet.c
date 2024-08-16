@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   02_buffet.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 12:04:33 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/16 18:28:14 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_fill_the_list_of_diners(t_buffet *host, unsigned int n)
+/* void	philo_fill_the_list_of_diners(t_buffet *host, unsigned int n)
 {
 	if (n < 2)
 	{
@@ -22,6 +22,27 @@ void	philo_fill_the_list_of_diners(t_buffet *host, unsigned int n)
 	host->seats = n;
 	host->list_of_diners = (t_diner *)malloc(n * sizeof(t_diner));
 	philo_memcheck(host->list_of_diners);
+} */
+
+int	philo_fill_the_list_of_diners(t_buffet *host, u_int *args)
+{
+	int	status;
+	
+	status = 0;
+	if (args[PHILOSOPHERS] == 1)
+	{
+		usleep(args[TIME_TO_DIE] * 1000);
+		printf("%u 1 died\n", args[TIME_TO_DIE]);
+		status = 1;
+	}
+	else
+	{
+		host->seats = args[PHILOSOPHERS];
+		host->list_of_diners = (t_diner *)malloc(host->seats \
+		* sizeof(t_diner));
+		philo_memcheck(host->list_of_diners);
+	}
+	return (status);
 }
 
 void	philo_buffet_preparation(t_buffet *host)
