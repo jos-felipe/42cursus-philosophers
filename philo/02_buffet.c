@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 10:45:33 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:26:42 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	philo_buffet_closing(t_buffet *host)
 	{
 		result_code = pthread_join(host->list_of_diners[u].diner, NULL);
 		assert(!result_code);
+		pthread_mutex_destroy(&host->forks_state[u]);
 		u++;
 	}
 	pthread_mutex_lock(host->mutex);
@@ -94,4 +95,5 @@ void	philo_buffet_closing(t_buffet *host)
 	free(host->forks);
 	free(host->list_of_diners);
 	free(host->mutex);
+	free(host->forks_state);
 }
