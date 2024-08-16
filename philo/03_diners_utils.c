@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 10:09:26 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:05:58 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*philo_diners_all_you_can_eat(void *arguments)
 		}
 		else
 		{
-			philo_timestamp_eat_sleep_think(philo, u, next);
+			philo_eat_sleep_think(philo, u, next);
 			pthread_mutex_unlock(philo->mutex);
 		}
 	}
