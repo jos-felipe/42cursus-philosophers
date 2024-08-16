@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/07 16:31:03 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/16 09:40:56 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*philo_diners_all_you_can_eat(void *arguments)
 	philo = (t_diner *)arguments;
 	u = philo->diner_id + 1;
 	next = u % philo->diet[PHILOSOPHERS] + 1;
-	philo_printf("%f %u is sleeping\n", philo, u);
+	philo_printf("%d %u is sleeping\n", philo, u);
 	if (u % 2 == 0)
 		usleep(philo->diet[TIME_TO_EAT] * 1000);
 	while (42)
