@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/19 12:27:42 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/19 12:38:36 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,13 @@ die: all
 	@sh qa/tdd.sh
 	@rm -f ref.txt stdout.txt
 
-eval: one seven die
+nodeath: all
+	@echo "./philo 5 800 200 200"
+	@echo "0" > ref.txt
+	@timeout 10s ./${NAME} 5 800 200 200 | grep "died" | wc -l | tr -d ' \t' > stdout.txt
+	@sh qa/tdd.sh
+	@rm -f ref.txt stdout.txt
+
+eval: one seven die nodeath
 
 .PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run sanatize one seven die eval
