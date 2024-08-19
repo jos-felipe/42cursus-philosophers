@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 10:43:59 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:12:21 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	ft_isdigit(int c)
 	return (c >= '0' && c <= '9');
 }
 
-U_INT	ft_atou(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
-	U_INT	nb;
+	int	nb;
 
 	nb = 0;
 	while (*nptr == '\t' || *nptr == '\n' || *nptr == '\v' || \

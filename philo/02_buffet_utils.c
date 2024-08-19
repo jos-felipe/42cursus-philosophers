@@ -6,16 +6,16 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 10:43:59 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:12:21 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static void	philo_set_diner_diet(t_diner *philo, \
-U_INT *args)
+int *args)
 {
-	U_INT	u;
+	int	u;
 
 	u = 0;
 	while (u < N_ARGS)
@@ -25,7 +25,7 @@ U_INT *args)
 	}
 }
 
-double	philo_update_next_meal(double last_meal_in_ms, U_INT *diet)
+double	philo_update_next_meal(double last_meal_in_ms, int *diet)
 {
 	double	next_meal_in_ms;
 
@@ -44,7 +44,7 @@ void	philo_memcheck(void *ptr)
 }
 
 void	philo_buffet_newdiner(t_buffet *host, \
-U_INT *args, U_INT u)
+int *args, int u)
 {
 	host->list_of_diners[u].diner_id = u;
 	host->list_of_diners[u].exit_signal = &host->exit_signal;

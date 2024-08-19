@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/19 10:58:23 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/19 11:51:05 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,13 @@ seven: all
 	echo "./philo 5 1000 200 200 7"
 	@echo "35" > ref.txt
 	@./${NAME} 5 1000 200 200 7 | grep "is eating" | wc -l | tr -d ' \t' > stdout.txt
+	@sh qa/tdd.sh
+	@rm -f ref.txt stdout.txt
+
+die: all
+	echo "./philo 4 310 200 100"
+	@echo "1" > ref.txt
+	@./${NAME} 5 1000 200 200 7 | grep "died" | wc -l | tr -d ' \t' > stdout.txt
 	@sh qa/tdd.sh
 	@rm -f ref.txt stdout.txt
 

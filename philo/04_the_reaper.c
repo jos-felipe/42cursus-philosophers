@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 10:43:59 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:14:22 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	*philo_the_reaper_service(void *arguments)
 
 static void	philo_the_reaper_scythe(t_buffet *host)
 {
-	double			t0;
-	double			t1;
-	int				ts;
-	U_INT	u;
+	double	t0;
+	double	t1;
+	int		ts;
+	int		u;
 
 	t0 = philo_get_timestamp_in_ms(host->diner_start);
 	u = 0;

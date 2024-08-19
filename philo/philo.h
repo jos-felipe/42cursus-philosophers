@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 10:47:55 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:45:52 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ time_to_sleep (in milliseconds) \
 # define TIME_TO_SLEEP 3
 # define MEALS 4
 
-# define U_INT unsigned int
-
 typedef struct s_diner
 {
 	char			*exit_signal;
@@ -49,8 +47,8 @@ typedef struct s_diner
 	pthread_mutex_t	*mutex;
 	pthread_t		diner;
 	struct timeval	diner_start;
-	U_INT			diet[N_ARGS];
-	U_INT			diner_id;
+	int				diet[N_ARGS];
+	int				diner_id;
 }				t_diner;
 
 typedef struct s_buffet
@@ -62,36 +60,36 @@ typedef struct s_buffet
 	pthread_t		reaper;
 	struct timeval	diner_start;
 	t_diner			*list_of_diners;
-	U_INT			seats;
+	int				seats;
 }				t_buffet;
 
 // 01_args.c
 int				philo_validate_argv(int argc, char *argv[]);
 void			philo_assignment_args(int argc, char *argv[], \
-				U_INT *args);
+				int *args);
 
 // 01_args_utils.c
-U_INT			ft_atou(const char *nptr);
+int				ft_atoi(const char *nptr);
 
 // 02_buffet.c
 void			philo_buffet_preparation(t_buffet *host);
-void			philo_buffet_set_the_table(t_buffet *host, U_INT *args);
+void			philo_buffet_set_the_table(t_buffet *host, int *args);
 void			philo_buffet_closing(t_buffet *host);
-void			philo_fill_the_list_of_diners(t_buffet *host, U_INT *args);
-void			philo_one_diner(U_INT time_to_die);
+void			philo_fill_the_list_of_diners(t_buffet *host, int *args);
+void			philo_one_diner(int time_to_die);
 
 // 02_buffet_utils.c
-double			philo_update_next_meal(double toc, U_INT *diet);
+double			philo_update_next_meal(double toc, int *diet);
 void			philo_memcheck(void *ptr);
 void			philo_buffet_newdiner(t_buffet *host, \
-U_INT *args, U_INT u);
+int *args, int u);
 
 // 03_diners.c
 double			philo_get_timestamp_in_ms(struct timeval tic);
+double			philo_printf(char *state_fmt, t_diner *philo, \
+int u);
 void			philo_eat_sleep_think(t_diner *philo, \
-U_INT u, U_INT next);
-void			philo_printf(char *state_fmt, t_diner *philo, \
-U_INT u);
+int u, int next);
 
 // 03_diners_utils.c
 void			*philo_diners_service(void *arguments);

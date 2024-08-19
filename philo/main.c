@@ -6,13 +6,13 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 10:43:59 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:15:23 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	philo_startup(U_INT *args)
+static void	philo_startup(int *args)
 {
 	int	i;
 
@@ -23,8 +23,8 @@ static void	philo_startup(U_INT *args)
 
 int	main(int argc, char *argv[])
 {
-	t_buffet			spaghetti;
-	U_INT		args[N_ARGS];
+	t_buffet	spaghetti;
+	int			args[N_ARGS];
 
 	philo_startup(args);
 	if (argc < 5 || argc > 6)

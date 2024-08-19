@@ -6,46 +6,17 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 10:43:59 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:14:57 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* void	*philo_diners_all_you_can_eat(void *arguments)
-{
-	t_diner			*philo;
-	U_INT	u;
-	U_INT	next;
-
-	philo = (t_diner *)arguments;
-	u = philo->diner_id + 1;
-	next = u % philo->diet[PHILOSOPHERS] + 1;
-	philo_printf("%d %u is thinking\n", philo, u);
-	if (u % 2 == 0)
-		usleep(philo->diet[TIME_TO_EAT] * 1000);
-	while (42)
-	{
-		pthread_mutex_lock(philo->mutex);
-		if (*philo->exit_signal)
-		{
-			pthread_mutex_unlock(philo->mutex);
-			break ;
-		}
-		else
-		{
-			pthread_mutex_unlock(philo->mutex);
-			philo_eat_sleep_think(philo, u, next);
-		}
-	}
-	return (NULL);
-} */
-
 void	*philo_diners_service(void *arguments)
 {
-	t_diner			*philo;
-	U_INT	u;
-	U_INT	next;
+	t_diner	*philo;
+	int		u;
+	int		next;
 
 	philo = (t_diner *)arguments;
 	u = philo->diner_id + 1;
