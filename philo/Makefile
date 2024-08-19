@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/19 13:04:25 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/19 13:07:10 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,6 +126,6 @@ test5: all
 	@sh qa/tdd.sh
 	@rm -f ref.txt stdout.txt
 
-eval: test1 test2 test3 test4  test4
+eval: test1 test2 test3 test4 test5
 
 .PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run sanatize test1 test3 test4 test2 test4 eval
