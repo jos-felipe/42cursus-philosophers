@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 11:13:22 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 12:13:58 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	philo_fill_the_list_of_diners(t_buffet *host, int *args)
 	host->seats = args[PHILOSOPHERS];
 	host->list_of_diners = (t_diner *)malloc(host->seats \
 	* sizeof(t_diner));
-	philo_memcheck(host->list_of_diners);
+	assert(!philo_memcheck(host->list_of_diners));
 }
 
 void	philo_buffet_preparation(t_buffet *host)
@@ -32,11 +32,11 @@ void	philo_buffet_preparation(t_buffet *host)
 	int	u;
 
 	host->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	philo_memcheck(host->mutex);
+	assert(!philo_memcheck(host->mutex));
 	pthread_mutex_init(host->mutex, NULL);
 	host->forks_state = (pthread_mutex_t *)malloc(\
 	host->seats * sizeof(pthread_mutex_t));
-	philo_memcheck(host->forks_state);
+	assert(!philo_memcheck(host->forks_state));
 	u = 0;
 	while (u < host->seats)
 	{

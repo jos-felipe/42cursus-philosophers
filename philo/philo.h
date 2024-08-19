@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 11:45:52 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 12:12:13 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void			philo_one_diner(int time_to_die);
 
 // 02_buffet_utils.c
 double			philo_update_next_meal(double toc, int *diet);
-void			philo_memcheck(void *ptr);
+int				philo_memcheck(void *ptr);
 void			philo_buffet_newdiner(t_buffet *host, \
 int *args, int u);
 
