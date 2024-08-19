@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/19 09:53:46 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/19 10:37:12 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,10 @@ run: all
 sanatize: debug
 	./${PROGRAM_NAME}_debug ${ARGS}
 
-eval: all
-	./${NAME} 5 900 200 200 7
+tdd: all
+	@echo "800 1 is thinking\n800 1 died" > ref.txt
+	./${NAME} 1 800 200 200 > stdout.txt
+	@sh qa/tdd.sh
+	@rm -f ref.txt stdout.txt
 
-.PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run sanatize eval
+.PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run sanatize tdd
