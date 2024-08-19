@@ -6,14 +6,14 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/16 11:40:42 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/19 12:38:36 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PROGRAM_NAME = philo
 
 NAME = ${PROGRAM_NAME}
-ARGS = 4 400 200 201 3
+ARGS = 4 400 200 201
 ARGS_HELGRIND = 4 400 200 201 3
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -85,4 +85,34 @@ run: all
 sanatize: debug
 	./${PROGRAM_NAME}_debug ${ARGS}
 
-.PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run sanatize
+one: all
+	@echo "./philo 1 800 200 200"
+	@echo "800 1 is thinking\n800 1 died" > ref.txt
+	@./${NAME} 1 800 200 200 > stdout.txt
+	@sh qa/tdd.sh
+	@rm -f ref.txt stdout.txt
+	
+seven: all
+	@echo "./philo 5 800 200 200 7"
+	@echo "35" > ref.txt
+	@./${NAME} 5 800 200 200 7 | grep "is eating" | wc -l | tr -d ' \t' > stdout.txt
+	@sh qa/tdd.sh
+	@rm -f ref.txt stdout.txt
+
+die: all
+	@echo "./philo 4 310 200 100"
+	@echo "1" > ref.txt
+	@./${NAME} 4 310 200 100 | grep "died" | wc -l | tr -d ' \t' > stdout.txt
+	@sh qa/tdd.sh
+	@rm -f ref.txt stdout.txt
+
+nodeath: all
+	@echo "./philo 5 800 200 200"
+	@echo "0" > ref.txt
+	@timeout 10s ./${NAME} 5 800 200 200 | grep "died" | wc -l | tr -d ' \t' > stdout.txt
+	@sh qa/tdd.sh
+	@rm -f ref.txt stdout.txt
+
+eval: one seven die nodeath
+
+.PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run sanatize one seven die eval

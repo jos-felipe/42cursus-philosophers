@@ -6,34 +6,13 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 09:47:04 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:14:22 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	philo_the_reaper_scythe(t_buffet *host)
-{
-	double			t0;
-	double			t1;
-	int				ts;
-	unsigned int	u;
-
-	t0 = philo_get_timestamp_in_ms(host->diner_start);
-	u = 0;
-	while (u < host->seats)
-	{
-		t1 = host->list_of_diners[u].next_meal_in_ms;
-		if (t1 < t0)
-		{
-			ts = (int)philo_get_timestamp_in_ms(host->diner_start);
-			printf("%d %u died\n", ts, u + 1);
-			host->exit_signal = 1;
-			break ;
-		}
-		u++;
-	}
-}
+static void	philo_the_reaper_scythe(t_buffet *host);
 
 void	*philo_the_reaper_service(void *arguments)
 {
@@ -55,4 +34,27 @@ void	*philo_the_reaper_service(void *arguments)
 		}
 	}
 	return (NULL);
+}
+
+static void	philo_the_reaper_scythe(t_buffet *host)
+{
+	double	t0;
+	double	t1;
+	int		ts;
+	int		u;
+
+	t0 = philo_get_timestamp_in_ms(host->diner_start);
+	u = 0;
+	while (u < host->seats)
+	{
+		t1 = host->list_of_diners[u].next_meal_in_ms;
+		if (t1 < t0)
+		{
+			ts = (int)philo_get_timestamp_in_ms(host->diner_start);
+			printf("%d %u died\n", ts, u + 1);
+			host->exit_signal = 1;
+			break ;
+		}
+		u++;
+	}
 }

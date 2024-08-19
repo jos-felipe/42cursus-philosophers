@@ -6,34 +6,37 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 12:04:33 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 12:13:58 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_fill_the_list_of_diners(t_buffet *host, unsigned int n)
+void	philo_one_diner(int time_to_die)
 {
-	if (n < 2)
-	{
-		printf("fatal: number of philosophers must be greater than one");
-		exit(EXIT_FAILURE);
-	}
-	host->seats = n;
-	host->list_of_diners = (t_diner *)malloc(n * sizeof(t_diner));
-	philo_memcheck(host->list_of_diners);
+	printf("%u 1 is thinking\n", time_to_die);
+	usleep(time_to_die * 1000);
+	printf("%u 1 died\n", time_to_die);
+}
+
+void	philo_fill_the_list_of_diners(t_buffet *host, int *args)
+{
+	host->seats = args[PHILOSOPHERS];
+	host->list_of_diners = (t_diner *)malloc(host->seats \
+	* sizeof(t_diner));
+	assert(!philo_memcheck(host->list_of_diners));
 }
 
 void	philo_buffet_preparation(t_buffet *host)
 {
-	unsigned int	u;
+	int	u;
 
 	host->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	philo_memcheck(host->mutex);
+	assert(!philo_memcheck(host->mutex));
 	pthread_mutex_init(host->mutex, NULL);
 	host->forks_state = (pthread_mutex_t *)malloc(\
 	host->seats * sizeof(pthread_mutex_t));
-	philo_memcheck(host->forks_state);
+	assert(!philo_memcheck(host->forks_state));
 	u = 0;
 	while (u < host->seats)
 	{
@@ -44,23 +47,25 @@ void	philo_buffet_preparation(t_buffet *host)
 }
 
 void	philo_buffet_set_the_table(t_buffet *host, \
-unsigned int *args)
+int *args)
 {
-	unsigned int	u;
-	int				result_code;
-	void			*start_routine;
+	int	u;
+	int	result_code;
 
 	pthread_mutex_lock(host->mutex);
 	host->exit_signal = 0;
-	start_routine = philo_diners_all_you_can_eat;
-	if (args[MEALS])
-		start_routine = philo_diners_service;
+	host->open_buffet = 0;
+	if (args[MEALS] == 0)
+	{
+		host->open_buffet = 1;
+		args[MEALS] = 42;
+	}
 	u = 0;
 	while (u < host->seats)
 	{
 		philo_buffet_newdiner(host, args, u);
 		result_code = pthread_create(&host->list_of_diners[u].diner, \
-		NULL, start_routine, &host->list_of_diners[u]);
+		NULL, philo_diners_service, &host->list_of_diners[u]);
 		assert(!result_code);
 		u++;
 	}
@@ -72,8 +77,8 @@ unsigned int *args)
 
 void	philo_buffet_closing(t_buffet *host)
 {
-	unsigned int	u;
-	int				result_code;
+	int	u;
+	int	result_code;
 
 	u = 0;
 	while (u < host->seats)

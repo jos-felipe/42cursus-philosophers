@@ -6,26 +6,29 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 12:03:33 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 12:11:51 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static void	philo_set_diner_diet(t_diner *philo, \
-unsigned int *args)
-{
-	unsigned int	u;
+int *args);
 
-	u = 0;
-	while (u < N_ARGS)
-	{
-		philo->diet[u] = args[u];
-		u++;
-	}
+void	philo_buffet_newdiner(t_buffet *host, \
+int *args, int u)
+{
+	host->list_of_diners[u].diner_id = u;
+	host->list_of_diners[u].exit_signal = &host->exit_signal;
+	host->list_of_diners[u].open_buffet = host->open_buffet;
+	host->list_of_diners[u].next_meal_in_ms = (double)args[TIME_TO_DIE];
+	host->list_of_diners[u].diner_start = host->diner_start;
+	host->list_of_diners[u].mutex = host->mutex;
+	host->list_of_diners[u].forks_state = host->forks_state;
+	philo_set_diner_diet(&host->list_of_diners[u], args);
 }
 
-double	philo_update_next_meal(double last_meal_in_ms, unsigned int *diet)
+double	philo_update_next_meal(double last_meal_in_ms, int *diet)
 {
 	double	next_meal_in_ms;
 
@@ -34,23 +37,28 @@ double	philo_update_next_meal(double last_meal_in_ms, unsigned int *diet)
 	return (next_meal_in_ms);
 }
 
-void	philo_memcheck(void *ptr)
+int	philo_memcheck(void *ptr)
 {
+	int	status;
+
+	status = 0;
 	if (!ptr)
 	{
 		printf("fatal: unable to allocate memory");
-		exit(EXIT_FAILURE);
+		status = 1;
 	}
+	return (status);
 }
 
-void	philo_buffet_newdiner(t_buffet *host, \
-unsigned int *args, unsigned int u)
+static void	philo_set_diner_diet(t_diner *philo, \
+int *args)
 {
-	host->list_of_diners[u].diner_id = u;
-	host->list_of_diners[u].exit_signal = &host->exit_signal;
-	host->list_of_diners[u].next_meal_in_ms = (double)args[TIME_TO_DIE];
-	host->list_of_diners[u].diner_start = host->diner_start;
-	host->list_of_diners[u].mutex = host->mutex;
-	host->list_of_diners[u].forks_state = host->forks_state;
-	philo_set_diner_diet(&host->list_of_diners[u], args);
+	int	u;
+
+	u = 0;
+	while (u < N_ARGS)
+	{
+		philo->diet[u] = args[u];
+		u++;
+	}
 }
