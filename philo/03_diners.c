@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 11:46:37 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 12:21:34 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int u, int next)
 	pthread_mutex_lock(&philo->forks_state[next - 1]);
 	philo_printf("%d %u has taken a fork\n", philo, u);
 	ts = philo_printf("%d %u is eating\n", philo, u);
-	pthread_mutex_unlock(philo->mutex);
+	pthread_mutex_lock(philo->mutex);
 	philo->next_meal_in_ms = philo_update_next_meal(ts, philo->diet);
 	pthread_mutex_unlock(philo->mutex);
 	usleep(philo->diet[TIME_TO_EAT] * 1000);

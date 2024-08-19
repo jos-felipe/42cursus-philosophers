@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/19 12:14:59 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/19 12:27:42 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,21 +86,21 @@ sanatize: debug
 	./${PROGRAM_NAME}_debug ${ARGS}
 
 one: all
-	echo "./philo 1 800 200 200"
+	@echo "./philo 1 800 200 200"
 	@echo "800 1 is thinking\n800 1 died" > ref.txt
 	@./${NAME} 1 800 200 200 > stdout.txt
 	@sh qa/tdd.sh
 	@rm -f ref.txt stdout.txt
 	
 seven: all
-	echo "./philo 5 1000 200 200 7"
+	@echo "./philo 5 800 200 200 7"
 	@echo "35" > ref.txt
-	@./${NAME} 5 1000 200 200 7 | grep "is eating" | wc -l | tr -d ' \t' > stdout.txt
+	@./${NAME} 5 800 200 200 7 | grep "is eating" | wc -l | tr -d ' \t' > stdout.txt
 	@sh qa/tdd.sh
 	@rm -f ref.txt stdout.txt
 
 die: all
-	echo "./philo 4 310 200 100"
+	@echo "./philo 4 310 200 100"
 	@echo "1" > ref.txt
 	@./${NAME} 4 310 200 100 | grep "died" | wc -l | tr -d ' \t' > stdout.txt
 	@sh qa/tdd.sh
