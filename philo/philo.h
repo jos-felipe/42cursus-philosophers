@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 09:16:28 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:13:32 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ typedef struct s_buffet
 }				t_buffet;
 
 // 01_args.c
+int				philo_validate_argv(int argc, char *argv[]);
 void			philo_validate_argc(int argc);
-void			philo_validate_argv(int argc, char *argv[]);
 void			philo_assignment_args(int argc, char *argv[], \
 				unsigned int *args);
 
@@ -75,11 +75,11 @@ void			philo_assignment_args(int argc, char *argv[], \
 unsigned int	ft_atou(const char *nptr);
 
 // 02_buffet.c
-/* void			philo_fill_the_list_of_diners(t_buffet *host, unsigned int n); */
-int				philo_fill_the_list_of_diners(t_buffet *host, u_int *args);
 void			philo_buffet_preparation(t_buffet *host);
 void			philo_buffet_set_the_table(t_buffet *host, unsigned int *args);
 void			philo_buffet_closing(t_buffet *host);
+void			philo_fill_the_list_of_diners(t_buffet *host, u_int *args);
+void			philo_one_diner(u_int time_to_die);
 
 // 02_buffet_utils.c
 double			philo_update_next_meal(double toc, unsigned int *diet);

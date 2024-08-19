@@ -6,26 +6,28 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/08 15:07:04 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:15:40 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_validate_argc(int argc)
-{
-	if (argc < 5 || argc > 6)
-	{
-		printf(PHILO_FATAL_ERROR);
-		printf(PHILO_ARGS);
-		exit(EXIT_FAILURE);
-	}
-}
+// void	philo_validate_argc(int argc)
+// {
+// 	if (argc < 5 || argc > 6)
+// 	{
+// 		printf(PHILO_FATAL_ERROR);
+// 		printf(PHILO_ARGS);
+// 		exit(EXIT_FAILURE);
+// 	}
+// }
 
-void	philo_validate_argv(int argc, char *argv[])
+int		philo_validate_argv(int argc, char *argv[])
 {
+	int	status;
 	int	i;
 
+	status = 0;
 	i = 0;
 	while (++i < argc)
 	{
@@ -33,9 +35,10 @@ void	philo_validate_argv(int argc, char *argv[])
 		{
 			printf(OUT_OF_BOUNDS_FATAL, i);
 			printf(OUT_OF_BOUNDS_INFO, argv[i]);
-			exit(EXIT_FAILURE);
+			status = 1;
 		}
 	}
+	return (status);
 }
 
 void	philo_assignment_args(int argc, char *argv[], unsigned int *args)

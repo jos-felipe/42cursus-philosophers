@@ -6,44 +6,25 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 09:24:10 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:16:35 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* void	philo_fill_the_list_of_diners(t_buffet *host, unsigned int n)
+void	philo_one_diner(u_int time_to_die)
 {
-	if (n < 2)
-	{
-		printf("fatal: number of philosophers must be greater than one");
-		exit(EXIT_FAILURE);
-	}
-	host->seats = n;
-	host->list_of_diners = (t_diner *)malloc(n * sizeof(t_diner));
-	philo_memcheck(host->list_of_diners);
-} */
+		printf("%u 1 is thinking\n", time_to_die);
+		usleep(time_to_die * 1000);
+		printf("%u 1 died\n", time_to_die);
+}
 
-int	philo_fill_the_list_of_diners(t_buffet *host, u_int *args)
+void	philo_fill_the_list_of_diners(t_buffet *host, u_int *args)
 {
-	int	status;
-	
-	status = 0;
-	if (args[PHILOSOPHERS] == 1)
-	{
-		printf("%u 1 is thinking\n", args[TIME_TO_DIE]);
-		usleep(args[TIME_TO_DIE] * 1000);
-		printf("%u 1 died\n", args[TIME_TO_DIE]);
-		status = 1;
-	}
-	else
-	{
-		host->seats = args[PHILOSOPHERS];
-		host->list_of_diners = (t_diner *)malloc(host->seats \
-		* sizeof(t_diner));
-		philo_memcheck(host->list_of_diners);
-	}
-	return (status);
+	host->seats = args[PHILOSOPHERS];
+	host->list_of_diners = (t_diner *)malloc(host->seats \
+	* sizeof(t_diner));
+	philo_memcheck(host->list_of_diners);
 }
 
 void	philo_buffet_preparation(t_buffet *host)

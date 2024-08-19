@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 18:30:11 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:12:28 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,23 @@ int	main(int argc, char *argv[])
 	unsigned int		args[N_ARGS];
 
 	philo_startup(args);
-	philo_validate_argc(argc);
-	philo_validate_argv(argc, argv);
+	if (argc < 5 || argc > 6)
+	{
+		printf(PHILO_FATAL_ERROR);
+		printf(PHILO_ARGS);
+		return (1);
+	}
+	if (philo_validate_argv(argc, argv))
+		return (1);
 	philo_assignment_args(argc, argv, args);
-	assert(!philo_fill_the_list_of_diners(&spaghetti, args));
-	philo_buffet_preparation(&spaghetti);
-	philo_buffet_set_the_table(&spaghetti, args);
-	philo_buffet_closing(&spaghetti);
+	if (args[PHILOSOPHERS] == 1)
+		philo_one_diner(args[TIME_TO_DIE]);
+	else
+	{
+		philo_fill_the_list_of_diners(&spaghetti, args);
+		philo_buffet_preparation(&spaghetti);
+		philo_buffet_set_the_table(&spaghetti, args);
+		philo_buffet_closing(&spaghetti);
+	}
 	return (0);
 }
