@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/19 13:00:06 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/19 13:04:25 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,7 @@ test1: all
 test2: all
 	@echo "./philo ${TEST_2}"
 	@echo "0" > ref.txt
-	@timeout 10s ./${NAME} ${TEST_2} | grep "died" | wc -l | tr -d ' \t' > stdout.txt
+	@timeout 15s ./${NAME} ${TEST_2} | grep "died" | wc -l | tr -d ' \t' > stdout.txt
 	@sh qa/tdd.sh
 	@rm -f ref.txt stdout.txt
 	
@@ -115,7 +115,7 @@ test3: all
 test4: all
 	@echo "./philo ${TEST_4}"
 	@echo "0" > ref.txt
-	@./${NAME} ${TEST_4} | grep "died" | wc -l | tr -d ' \t' > stdout.txt
+	@timeout 15s ./${NAME} ${TEST_4} | grep "died" | wc -l | tr -d ' \t' > stdout.txt
 	@sh qa/tdd.sh
 	@rm -f ref.txt stdout.txt
 
@@ -125,8 +125,6 @@ test5: all
 	@./${NAME} ${TEST_5} | grep "died" | wc -l | tr -d ' \t' > stdout.txt
 	@sh qa/tdd.sh
 	@rm -f ref.txt stdout.txt
-
-	
 
 eval: test1 test2 test3 test4  test4
 
