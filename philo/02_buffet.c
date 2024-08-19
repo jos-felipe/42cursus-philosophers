@@ -6,20 +6,20 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 10:16:35 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:46:27 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_one_diner(u_int time_to_die)
+void	philo_one_diner(U_INT time_to_die)
 {
 		printf("%u 1 is thinking\n", time_to_die);
 		usleep(time_to_die * 1000);
 		printf("%u 1 died\n", time_to_die);
 }
 
-void	philo_fill_the_list_of_diners(t_buffet *host, u_int *args)
+void	philo_fill_the_list_of_diners(t_buffet *host, U_INT *args)
 {
 	host->seats = args[PHILOSOPHERS];
 	host->list_of_diners = (t_diner *)malloc(host->seats \
@@ -29,7 +29,7 @@ void	philo_fill_the_list_of_diners(t_buffet *host, u_int *args)
 
 void	philo_buffet_preparation(t_buffet *host)
 {
-	unsigned int	u;
+	U_INT	u;
 
 	host->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	philo_memcheck(host->mutex);
@@ -47,9 +47,9 @@ void	philo_buffet_preparation(t_buffet *host)
 }
 
 void	philo_buffet_set_the_table(t_buffet *host, \
-unsigned int *args)
+U_INT *args)
 {
-	unsigned int	u;
+	U_INT	u;
 	int				result_code;
 
 	pthread_mutex_lock(host->mutex);
@@ -77,7 +77,7 @@ unsigned int *args)
 
 void	philo_buffet_closing(t_buffet *host)
 {
-	unsigned int	u;
+	U_INT	u;
 	int				result_code;
 
 	u = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   04_the_reaper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 16:59:03 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:43:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	philo_the_reaper_scythe(t_buffet *host)
 	double			t0;
 	double			t1;
 	int				ts;
-	unsigned int	u;
+	U_INT	u;
 
 	t0 = philo_get_timestamp_in_ms(host->diner_start);
 	u = 0;

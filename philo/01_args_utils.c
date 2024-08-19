@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_args_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/07/03 15:00:45 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:43:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	ft_isdigit(int c)
 	return (c >= '0' && c <= '9');
 }
 
-unsigned int	ft_atou(const char *nptr)
+U_INT	ft_atou(const char *nptr)
 {
-	unsigned int	nb;
+	U_INT	nb;
 
 	nb = 0;
 	while (*nptr == '\t' || *nptr == '\n' || *nptr == '\v' || \

@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 09:19:45 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:43:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /* void	*philo_diners_all_you_can_eat(void *arguments)
 {
 	t_diner			*philo;
-	unsigned int	u;
-	unsigned int	next;
+	U_INT	u;
+	U_INT	next;
 
 	philo = (t_diner *)arguments;
 	u = philo->diner_id + 1;
@@ -44,8 +44,8 @@
 void	*philo_diners_service(void *arguments)
 {
 	t_diner			*philo;
-	unsigned int	u;
-	unsigned int	next;
+	U_INT	u;
+	U_INT	next;
 
 	philo = (t_diner *)arguments;
 	u = philo->diner_id + 1;

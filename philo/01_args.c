@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 10:15:40 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:43:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		philo_validate_argv(int argc, char *argv[])
 	return (status);
 }
 
-void	philo_assignment_args(int argc, char *argv[], unsigned int *args)
+void	philo_assignment_args(int argc, char *argv[], U_INT *args)
 {
 	int	i;
 
