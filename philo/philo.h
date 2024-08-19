@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:32:04 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 18:26:04 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 09:16:28 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ time_to_sleep (in milliseconds) \
 typedef struct s_diner
 {
 	char			*exit_signal;
+	char			open_buffet;
 	double			next_meal_in_ms;
 	pthread_mutex_t	*forks_state;
 	pthread_mutex_t	*mutex;
@@ -55,6 +56,7 @@ typedef struct s_diner
 typedef struct s_buffet
 {
 	char			exit_signal;
+	char			open_buffet;
 	pthread_mutex_t	*forks_state;
 	pthread_mutex_t	*mutex;
 	pthread_t		reaper;

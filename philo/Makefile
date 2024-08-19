@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/16 16:48:38 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/19 09:53:46 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,4 +85,7 @@ run: all
 sanatize: debug
 	./${PROGRAM_NAME}_debug ${ARGS}
 
-.PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run sanatize
+eval: all
+	./${NAME} 5 900 200 200 7
+
+.PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run sanatize eval

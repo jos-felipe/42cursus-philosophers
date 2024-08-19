@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   03_diners_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 16:57:33 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 09:19:45 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*philo_diners_all_you_can_eat(void *arguments)
+/* void	*philo_diners_all_you_can_eat(void *arguments)
 {
 	t_diner			*philo;
 	unsigned int	u;
@@ -39,7 +39,7 @@ void	*philo_diners_all_you_can_eat(void *arguments)
 		}
 	}
 	return (NULL);
-}
+} */
 
 void	*philo_diners_service(void *arguments)
 {

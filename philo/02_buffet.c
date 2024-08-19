@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_buffet.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/16 18:28:14 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/19 09:24:10 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	philo_fill_the_list_of_diners(t_buffet *host, u_int *args)
 	status = 0;
 	if (args[PHILOSOPHERS] == 1)
 	{
+		printf("%u 1 is thinking\n", args[TIME_TO_DIE]);
 		usleep(args[TIME_TO_DIE] * 1000);
 		printf("%u 1 died\n", args[TIME_TO_DIE]);
 		status = 1;
@@ -69,19 +70,21 @@ unsigned int *args)
 {
 	unsigned int	u;
 	int				result_code;
-	void			*start_routine;
 
 	pthread_mutex_lock(host->mutex);
 	host->exit_signal = 0;
-	start_routine = philo_diners_all_you_can_eat;
-	if (args[MEALS])
-		start_routine = philo_diners_service;
+	host->open_buffet = 0;
+	if (args[MEALS] == 0)
+	{
+		host->open_buffet = 1;
+		args[MEALS] = 42;
+	}
 	u = 0;
 	while (u < host->seats)
 	{
 		philo_buffet_newdiner(host, args, u);
 		result_code = pthread_create(&host->list_of_diners[u].diner, \
-		NULL, start_routine, &host->list_of_diners[u]);
+		NULL, philo_diners_service, &host->list_of_diners[u]);
 		assert(!result_code);
 		u++;
 	}
