@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/19 12:48:35 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/19 13:00:06 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,12 @@ ifdef WITH_DEBUG
   NAME = ${PROGRAM_NAME}_debug
   CFLAGS = ${DFLAGS}
 endif
+
+TEST_1 = 1 800 200 200
+TEST_2 = 5 800 200 200
+TEST_3 = 5 800 200 200 7
+TEST_4 = 4 410 200 200
+TEST_5 = 4 310 200 100
 
 INCLUDE_DIR = ./
 INCLUDE_PATH = philo.h
@@ -85,41 +91,43 @@ run: all
 sanatize: debug
 	./${PROGRAM_NAME}_debug ${ARGS}
 
-one: all
-	@echo "./philo 1 800 200 200"
+test1: all
+	@echo "./philo ${TEST_1}"
 	@echo "800 1 is thinking\n800 1 died" > ref.txt
-	@./${NAME} 1 800 200 200 > stdout.txt
+	@./${NAME} ${TEST_1} > stdout.txt
 	@sh qa/tdd.sh
 	@rm -f ref.txt stdout.txt
 	
-seven: all
-	@echo "./philo 5 800 200 200 7"
+test2: all
+	@echo "./philo ${TEST_2}"
+	@echo "0" > ref.txt
+	@timeout 10s ./${NAME} ${TEST_2} | grep "died" | wc -l | tr -d ' \t' > stdout.txt
+	@sh qa/tdd.sh
+	@rm -f ref.txt stdout.txt
+	
+test3: all
+	@echo "./philo ${TEST_3}"
 	@echo "35" > ref.txt
-	@./${NAME} 5 800 200 200 7 | grep "is eating" | wc -l | tr -d ' \t' > stdout.txt
+	@./${NAME} ${TEST_3} | grep "is eating" | wc -l | tr -d ' \t' > stdout.txt
 	@sh qa/tdd.sh
 	@rm -f ref.txt stdout.txt
 
-onedeath: all
-	@echo "./philo 4 310 200 100"
+test4: all
+	@echo "./philo ${TEST_4}"
+	@echo "0" > ref.txt
+	@./${NAME} ${TEST_4} | grep "died" | wc -l | tr -d ' \t' > stdout.txt
+	@sh qa/tdd.sh
+	@rm -f ref.txt stdout.txt
+
+test5: all
+	@echo "./philo ${TEST_5}"
 	@echo "1" > ref.txt
-	@./${NAME} 4 310 200 100 | grep "died" | wc -l | tr -d ' \t' > stdout.txt
+	@./${NAME} ${TEST_5} | grep "died" | wc -l | tr -d ' \t' > stdout.txt
 	@sh qa/tdd.sh
 	@rm -f ref.txt stdout.txt
 
-nodeath: all
-	@echo "./philo 5 800 200 200"
-	@echo "0" > ref.txt
-	@timeout 10s ./${NAME} 5 800 200 200 | grep "died" | wc -l | tr -d ' \t' > stdout.txt
-	@sh qa/tdd.sh
-	@rm -f ref.txt stdout.txt
 	
-diehard: all
-	@echo "./philo 4 410 200 100"
-	@echo "0" > ref.txt
-	@./${NAME} 4 310 200 100 | grep "died" | wc -l | tr -d ' \t' > stdout.txt
-	@sh qa/tdd.sh
-	@rm -f ref.txt stdout.txt
 
-eval: one seven onedeath nodeath diehard
+eval: test1 test2 test3 test4  test4
 
-.PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run sanatize one seven onedeath nodeath diehard eval
+.PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run sanatize test1 test3 test4 test2 test4 eval
