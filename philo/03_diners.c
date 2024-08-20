@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/20 09:39:26 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/20 09:54:15 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int u, int next)
 		philo->diet[MEALS] -= 1;
 		if (philo->diet[MEALS] == 0)
 			philo->next_meal_in_ms = 0;
-	}	
+	}
 	philo_printf("%d %u is sleeping\n", philo, u);
 	usleep(philo->diet[TIME_TO_SLEEP] * 1000);
 	philo_printf("%d %u is thinking\n", philo, u);
