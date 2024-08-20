@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
+#    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/08/19 13:07:10 by josfelip         ###   ########.fr        #
+#    Updated: 2024/08/20 09:51:01 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,41 +91,46 @@ run: all
 sanatize: debug
 	./${PROGRAM_NAME}_debug ${ARGS}
 
-test1: all
+test1: all qa
 	@echo "./philo ${TEST_1}"
 	@echo "800 1 is thinking\n800 1 died" > ref.txt
 	@./${NAME} ${TEST_1} > stdout.txt
 	@sh qa/tdd.sh
-	@rm -f ref.txt stdout.txt
 	
-test2: all
+test2: all qa
 	@echo "./philo ${TEST_2}"
 	@echo "0" > ref.txt
 	@timeout 15s ./${NAME} ${TEST_2} | grep "died" | wc -l | tr -d ' \t' > stdout.txt
 	@sh qa/tdd.sh
-	@rm -f ref.txt stdout.txt
 	
-test3: all
+test3: all qa
 	@echo "./philo ${TEST_3}"
+	@echo "0" > ref.txt
+	@./${NAME} ${TEST_3} | grep "died" | wc -l | tr -d ' \t' > stdout.txt
+	@sh qa/tdd.sh
 	@echo "35" > ref.txt
 	@./${NAME} ${TEST_3} | grep "is eating" | wc -l | tr -d ' \t' > stdout.txt
 	@sh qa/tdd.sh
-	@rm -f ref.txt stdout.txt
+	
 
-test4: all
+test4: all qa
 	@echo "./philo ${TEST_4}"
 	@echo "0" > ref.txt
 	@timeout 15s ./${NAME} ${TEST_4} | grep "died" | wc -l | tr -d ' \t' > stdout.txt
 	@sh qa/tdd.sh
-	@rm -f ref.txt stdout.txt
 
-test5: all
+test5: all qa
 	@echo "./philo ${TEST_5}"
 	@echo "1" > ref.txt
 	@./${NAME} ${TEST_5} | grep "died" | wc -l | tr -d ' \t' > stdout.txt
 	@sh qa/tdd.sh
-	@rm -f ref.txt stdout.txt
 
 eval: test1 test2 test3 test4 test5
 
-.PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run sanatize test1 test3 test4 test2 test4 eval
+qa:
+	@mkdir -p qa/
+	@wget -P qa/ -nc https://raw.githubusercontent.com/jos-felipe/42cursus-philosophers/main/philo/qa/tdd.sh > /dev/null 2>&1
+	@wget -P qa/ -nc https://raw.githubusercontent.com/jos-felipe/42cursus-philosophers/main/philo/qa/mem_check.sh > /dev/null 2>&1
+
+
+.PHONY: all clean fclean re debug print memcheck faultcheck dataracescheck run sanatize test1 test3 test4 test2 test4 eval qa

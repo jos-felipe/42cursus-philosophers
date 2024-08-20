@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_diners.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:28 by josfelip          #+#    #+#             */
-/*   Updated: 2024/08/19 12:21:34 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/08/20 09:39:26 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ int u, int next)
 	pthread_mutex_unlock(&philo->forks_state[next - 1]);
 	pthread_mutex_unlock(&philo->forks_state[u - 1]);
 	if (philo->open_buffet == 0)
+	{
 		philo->diet[MEALS] -= 1;
+		if (philo->diet[MEALS] == 0)
+			philo->next_meal_in_ms = 0;
+	}	
 	philo_printf("%d %u is sleeping\n", philo, u);
 	usleep(philo->diet[TIME_TO_SLEEP] * 1000);
 	philo_printf("%d %u is thinking\n", philo, u);
