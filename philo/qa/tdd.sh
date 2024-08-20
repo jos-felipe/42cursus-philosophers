@@ -13,4 +13,5 @@ if [ $STATUS -eq 1 ]; then
 else
 	echo OK
 fi
+rm -f diff.out ref.txt stdout.txt
 exit $STATUS
